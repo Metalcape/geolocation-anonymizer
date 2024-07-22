@@ -58,28 +58,29 @@ class Country(Region):
         super().__init__(name, ADMIN_LV_MIN, shape, compress)
         self.subregions = dict()
         for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
-            self.subregions[f'lv_{i}'] = list[Region]
+            self.subregions[f'lv_{i}'] = list()
         if subregions is not None:
-            for r in subregions:
-                self.subregions[f'lv_{r.admin_level}'].append(r)
-            for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
-                sorted(self.subregions[f'lv_{i}'], key=lambda r: r.name)
+            self.add_subregions(subregions)
     
-    def add_subregions(self, subregions: list[Region], compress=True):
+    def add_subregions(self, subregions: list):
         for r in subregions:
             self.subregions[f'lv_{r.admin_level}'].append(r)
         for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
             sorted(self.subregions[f'lv_{i}'], key=lambda r: r.name)
     
-    def geolocate(self, point: shapely.Point) -> list[Region]:
+    def geolocate(self, point: shapely.Point) -> list:
+        all_subregions = list()
+        for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
+            all_subregions += self.subregions[f'lv_{i}']
+        
         # Build an rtree to search for the point location
         idx = index.Index()
-        for i, region in enumerate(itertools.chain([subregions[f'lv_{j}'] for j in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1)])):
+        for i, region in enumerate(all_subregions):
             idx.insert(i, region.boundary().bounds, obj=region)
 
         # Search for overlapping regions
         candidates = list(idx.intersection(point.bounds, objects=True))
-        containing_regions = list[Region]
+        containing_regions = list()
         for c in candidates:
             region = c.object
             if region.contains_point(point):
