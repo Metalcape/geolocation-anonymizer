@@ -102,7 +102,7 @@ def regions_query(country_name):
     query = f"""
         [out:json];
         area["name:en"="{country_name}"]["boundary"="administrative"]->.searchArea;
-        relation["boundary"="administrative"][admin_level != 2](area.searchArea);
+        relation["boundary"="administrative"][admin_level ~ "^[3-9]|1[0-1]$"](area.searchArea);
         out geom;
     """
     return query
