@@ -164,9 +164,9 @@ if __name__ == "__main__":
     else:
         if args.latitude is None or args.longitude is None:
             raise SystemExit("Invalid arguments. Use option -h for help.")
-        if args.latitude not in range(-90, 90):
+        if args.latitude < -90.0 or args.latitude > 90.0:
             raise SystemExit("Latitude must be between -90 and 90.")
-        if args.longitude not in range(-180, 180):
+        if args.longitude < -180.0 or args.longitude > 180.0:
             raise SystemExit("Latitude must be between -180 and 180.")
         original_point = geopy.location.Point(args.latitude, args.longitude)
 
