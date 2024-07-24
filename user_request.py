@@ -1,8 +1,5 @@
-import geopy.distance
-import geopy.location
 import shapely
 import random
-import geopy
 import requests
 import osm2geojson
 import argparse
@@ -181,32 +178,39 @@ def shape_obj_to_country(shape_obj: dict, compress=True) -> Country:
     shape = shape_obj['shape']
     return Country(name, shape, None, compress)
 
-def find_country(point: geopy.location.Point) -> Country | None:
-    # Generate a random point on a circle of radius R
-    R = random.uniform(50, 150)  # Radius in km
-    angle = random.uniform(0, 360)
-    random_point = geopy.distance.geodesic(kilometers=R).destination(original_point, angle)
+def find_country(point: shapely.Point) -> Country | None:
+    query = f"""
+        [out:json];
+        (
+        relation["boundary"="administrative"]["admin_level"="2"];
+        );
+        out geom;
+    """
 
-    # Create a second circle centered on the random point
-    radius2 = R * random.uniform(2, 3)
+    file_path = f'./cache/__countries.pkl'
+    if not os.path.exists(file_path):
+        overpass_data = fetch_overpass_data(query)
+        shape_objects = osm2geojson.json2shapes(overpass_data)
+        countries = [shape_obj_to_country(obj) for obj in shape_objects]
+        with open(file_path, 'wb') as file:
+            pickle.dump(countries, file)
+    else: 
+        with open(file_path, 'rb') as file:
+            countries = pickle.load(file)
 
-    query = country_query(random_point, radius2)
-    overpass_data = fetch_overpass_data(query)
-    
-    # Convert to shapely
-    shape_objects = osm2geojson.json2shapes(overpass_data)
-    countries = [shape_obj_to_country(obj) for obj in shape_objects]
+    # Build an rtree to search for the point location
+    idx = index.Index()
+    for i, country in enumerate(countries):
+        idx.insert(i, country.boundary().bounds, obj=country)
 
-    # Iterate over countries
-    country = None
-    point = shapely.geometry.Point(original_point.longitude, original_point.latitude)
-    for c in countries:
-        if c.contains_point(point):
-            country = c
-        else:
-            print(f"{c.name} does not contain the point")
-    return country
+    # Search for overlapping regions
 
+    candidates = list(idx.intersection(point.bounds, objects=True))
+    for c in candidates:
+        country = c.object
+        if country.contains_point(point):
+            return country
+  
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Generate a request vector for the anonymizer based on the coordinates passed as arguments."
@@ -234,10 +238,10 @@ if __name__ == "__main__":
         help="use a random pair of coordinates.",
     )
 
-    original_point = None
+    point = None
     args = parser.parse_args()
     if args.random >= 1:
-        original_point = geopy.location.Point(random.uniform(-90, 90), random.uniform(-180, 180))
+        point = shapely.Point(random.uniform(-180, 180), random.uniform(-90, 90))  # longitude first
     else:
         if args.latitude is None or args.longitude is None:
             raise SystemExit("Invalid arguments. Use option -h for help.")
@@ -245,12 +249,12 @@ if __name__ == "__main__":
             raise SystemExit("Latitude must be between -90 and 90.")
         if args.longitude < -180.0 or args.longitude > 180.0:
             raise SystemExit("Latitude must be between -180 and 180.")
-        original_point = geopy.location.Point(args.latitude, args.longitude)
+        point = shapely.Point(args.longitude, args.latitude)
 
-    country = find_country(original_point)
+    country = find_country(point)
     if country is None:
         raise SystemError("The coordinates do not belong to any country's territory.")
-    print(f"The point {original_point.latitude}, {original_point.longitude} is inside: {country.name}")
+    print(f"The point {point.latitude}, {point.longitude} is inside: {country.name}")
 
     # Try to load country data from cache
     try:
@@ -266,7 +270,6 @@ if __name__ == "__main__":
         country.serialize()  
 
     # Get the list of regions containing the point
-    point = shapely.Point(original_point.latitude, original_point.longitude)
     vector = country.geolocate_as_vector(point)
     containing_regions = country.get_regions_from_vector(vector)
     print('Geolocation vector:')
