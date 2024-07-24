@@ -165,7 +165,7 @@ def fetch_overpass_data(query):
     return response.json()
 
 def shape_obj_to_region(shape_obj: dict, compress=True) -> Region:
-    lv = shape_obj['properties']['tags']['admin_level']
+    lv = int(shape_obj['properties']['tags']['admin_level'])
     shape = shape_obj['shape']
     try:
         name = shape_obj['properties']['tags']['name:en']
