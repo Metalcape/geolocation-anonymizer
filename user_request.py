@@ -1,4 +1,5 @@
 import geopy.distance
+import geopy.location
 import shapely
 import random
 import geopy
@@ -8,8 +9,8 @@ import argparse
 from rtree import index
 import lzma
 import pickle
-import itertools
-import numpy
+import bisect
+import numpy as np
 
 ADMIN_LV_MIN = 2
 ADMIN_LV_MAX = 11
@@ -68,10 +69,41 @@ class Country(Region):
         for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
             sorted(self.subregions[f'lv_{i}'], key=lambda r: r.name)
     
-    def geolocate(self, point: shapely.Point) -> list:
+    def get_all_subregions(self) -> list[Region]:
         all_subregions = list()
         for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
             all_subregions += self.subregions[f'lv_{i}']
+        return all_subregions
+    
+    def get_vector_index(self, region: Region) -> int:
+        if (region.admin_level <= ADMIN_LV_MIN) or (region.admin_level > ADMIN_LV_MAX):
+            raise AttributeError("Administrative level out of range.")
+        
+        base_index = 0
+        for l in range(ADMIN_LV_MIN + 1, region.admin_level):
+            if l == region.admin_level:
+                i = bisect.bisect_left(self.subregions[f'lv_{l}'], region, key=lambda r: r.name)
+                if i != len(self.subregions[f'lv_{l}']) and self.subregions[f'lv_{l}'][i].name == region.name:
+                    return base_index + i
+                else: 
+                    raise ValueError
+            base_index += len(self.subregions[f'lv_{l}'])
+    
+    def get_regions_from_vector(self, vector: np.ndarray) -> list[Region]:
+        indices, = np.where(vector == 1)
+        regions = list()
+        
+        base_index = 0
+        for l in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
+            for i in indices:
+                if i >= base_index and i < len(self.subregions[f'lv_{l}']) + base_index:
+                    regions.append(self.subregions[f'lv_{l}'][i - base_index])
+            base_index += len(self.subregions[f'lv_{l}'])
+        return regions
+    
+    def geolocate_as_vector(self, point: shapely.Point):
+        all_subregions = self.get_all_subregions()
+        location_vector = np.array([0]*len(all_subregions), dtype=np.uint64)
         
         # Build an rtree to search for the point location
         idx = index.Index()
@@ -80,13 +112,13 @@ class Country(Region):
 
         # Search for overlapping regions
         candidates = list(idx.intersection(point.bounds, objects=True))
-        containing_regions = list()
         for c in candidates:
             region = c.object
             if region.contains_point(point):
-                containing_regions.append(region)
-        return containing_regions
-
+                ind = self.get_vector_index(region)
+                location_vector[ind] = 1
+        return location_vector
+    
 
 # Get administrative boundaries of level 2 (countries) around center with radius
 def country_query(center, radius): 
@@ -207,10 +239,11 @@ if __name__ == "__main__":
     country.add_subregions(subregions)
 
     # Get the list of regions containing the point
-    containing_regions = country.geolocate(point)
-
+    vector = country.geolocate_as_vector(point)
+    containing_regions = country.get_regions_from_vector(vector)
+    print('Geolocation vector:')
+    print(vector)
     print('List of containing regions:')
     for r in containing_regions:
         print(f'lv = {r.admin_level}, name = {r.name}')
-    
-    
+
