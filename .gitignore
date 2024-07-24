@@ -1,3 +1,5 @@
-venv
-.vscode
-err.txt
+/venv
+/.vscode
+/err.txt
+/out.txt
+/cache
