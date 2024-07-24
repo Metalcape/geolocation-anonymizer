@@ -11,6 +11,7 @@ import lzma
 import pickle
 import bisect
 import numpy as np
+import os
 
 ADMIN_LV_MIN = 2
 ADMIN_LV_MAX = 11
@@ -119,6 +120,23 @@ class Country(Region):
                 location_vector[ind] = 1
         return location_vector
     
+    def serialize(self):
+        os.makedirs('./cache', exist_ok=True)
+        file_path = f'./cache/{self.name}.pkl'
+        
+        with open(file_path, 'wb') as file:
+            pickle.dump(self, file)
+    
+    @staticmethod
+    def deserialize(name: str):
+        file_path = f'./cache/{name}.pkl'
+        
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"No cached data found for {name}.")
+        
+        with open(file_path, 'rb') as file:
+            country = pickle.load(file)
+        return country
 
 # Get administrative boundaries of level 2 (countries) around center with radius
 def country_query(center, radius): 
@@ -231,12 +249,18 @@ if __name__ == "__main__":
         raise SystemError("The coordinates do not belong to any country's territory.")
     print(f"The point {original_point.latitude}, {original_point.longitude} is inside: {country.name}")
 
-    # Download subregions data
-    query = regions_query(country.name)
-    overpass_data = fetch_overpass_data(query)
-    shape_objects = osm2geojson.json2shapes(overpass_data)
-    subregions = [shape_obj_to_region(obj) for obj in shape_objects]
-    country.add_subregions(subregions)
+    # Try to load country data from cache
+    try:
+        country = Country.deserialize(country.name)
+    except FileNotFoundError:
+        # Download subregions data
+        query = regions_query(country.name)
+        overpass_data = fetch_overpass_data(query)
+        shape_objects = osm2geojson.json2shapes(overpass_data)
+        subregions = [shape_obj_to_region(obj) for obj in shape_objects]
+        country.add_subregions(subregions)
+        # Save to cache
+        country.serialize()  
 
     # Get the list of regions containing the point
     vector = country.geolocate_as_vector(point)
