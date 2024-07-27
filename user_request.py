@@ -65,7 +65,7 @@ class Country(Region):
         for r in subregions:
             self.subregions[f'lv_{r.admin_level}'].append(r)
         for i in range(ADMIN_LV_MIN + 1, ADMIN_LV_MAX + 1):
-            sorted(self.subregions[f'lv_{i}'], key=lambda r: r.name)
+            self.subregions[f'lv_{i}'].sort(key=lambda r: r.name.casefold())
     
     def get_all_subregions(self) -> list[Region]:
         all_subregions = list()
@@ -78,14 +78,15 @@ class Country(Region):
             raise AttributeError("Administrative level out of range.")
         
         base_index = 0
-        for l in range(ADMIN_LV_MIN + 1, region.admin_level):
+        for l in range(ADMIN_LV_MIN + 1, region.admin_level + 1):
             if l == region.admin_level:
-                i = bisect.bisect_left(self.subregions[f'lv_{l}'], region, key=lambda r: r.name)
-                if i != len(self.subregions[f'lv_{l}']) and self.subregions[f'lv_{l}'][i].name == region.name:
+                i = bisect.bisect_left(self.subregions[f'lv_{l}'], region.name, key=lambda r: r.name)
+                if self.subregions[f'lv_{l}'][i].name == region.name:
                     return base_index + i
-                else: 
-                    raise ValueError
+                else:
+                    raise ValueError(f"The subregion at index {base_index + i} should be {region.name} but is actually {self.subregions[f'lv_{l}'][i].name}")
             base_index += len(self.subregions[f'lv_{l}'])
+        raise ValueError(f"The vector index for {region.name} was not found")
     
     def get_regions_from_vector(self, vector: np.ndarray) -> list[Region]:
         indices, = np.where(vector == 1)
