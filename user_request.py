@@ -136,17 +136,6 @@ class Country(Region):
             country = pickle.load(file)
         return country
 
-# Get administrative boundaries of level 2 (countries) around center with radius
-def country_query(center, radius): 
-    query = f"""
-        [out:json];
-        (
-        relation["boundary"="administrative"]["admin_level"="2"](around:{radius * 1000},{center.latitude},{center.longitude});
-        );
-        out geom;
-    """
-    return query
-
 def regions_query(country_name):
     query = f"""
         [out:json];
@@ -205,7 +194,6 @@ def find_country(point: shapely.Point) -> Country | None:
         idx.insert(i, country.boundary().bounds, obj=country)
 
     # Search for overlapping regions
-
     candidates = list(idx.intersection(point.bounds, objects=True))
     for c in candidates:
         country = c.object
@@ -255,7 +243,7 @@ if __name__ == "__main__":
     country = find_country(point)
     if country is None:
         raise SystemError("The coordinates do not belong to any country's territory.")
-    print(f"The point {point.latitude}, {point.longitude} is inside: {country.name}")
+    print(f"The point {point.y}, {point.x} is inside: {country.name}")
 
     # Try to load country data from cache
     try:
