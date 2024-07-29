@@ -1,8 +1,8 @@
 /venv
 /.vscode
-/err.txt
-/out.txt
-/cache
+err.txt
+out.txt
+/client/cache
 *.o
 *.so
 *.out
