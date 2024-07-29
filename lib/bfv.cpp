@@ -2,32 +2,16 @@
 
 using namespace seal;
 
-class HEContext {
-public:
-    EncryptionParameters parms;
-    SEALContext context;
-    KeyGenerator keygen;
-    SecretKey secret_key;
-    PublicKey public_key;
-    RelinKeys relin_keys;
-
-    HEContext(const seal::EncryptionParameters &parms) : parms(parms), context(parms), keygen(context) {
+// Constructors
+HEContext::HEContext(const seal::EncryptionParameters &parms) : parms(parms), context(parms), keygen(context) {
         secret_key = keygen.secret_key();
         keygen.create_public_key(public_key);
         keygen.create_relin_keys(relin_keys);
-    }
-};
+}
 
-class HE : public HEContext {
-public:
-    Encryptor encryptor;
-    Evaluator evaluator;
-    Decryptor decryptor;
-    BatchEncoder batch_encoder;
+HE::HE(const seal::EncryptionParameters &parms) : HEContext(parms), encryptor(context, public_key), evaluator(context), decryptor(context, secret_key), batch_encoder(context) {}
 
-    HE(const seal::EncryptionParameters &parms) : HEContext(parms), encryptor(context, public_key), evaluator(context), decryptor(context, secret_key), batch_encoder(context) {}
-};
-
+// Functions
 HE * create_encryption_context() {
     EncryptionParameters parms(scheme_type::bfv);
     size_t poly_modulus_degree = pow(2.0, POLY_MOD_DEG);

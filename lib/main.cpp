@@ -1,6 +1,8 @@
 #include "libbfv.h"
 #include <vector>
 
+using namespace seal;
+
 int main() {
     /* Create encryption context */
     HE *bfv = create_encryption_context();
