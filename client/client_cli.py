@@ -267,3 +267,6 @@ if __name__ == "__main__":
     for r in containing_regions:
         print(f'lv = {r.admin_level}, name = {r.name}')
 
+    # Send location vector to server
+    
+    # Await response from server
