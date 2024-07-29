@@ -3,3 +3,6 @@
 /err.txt
 /out.txt
 /cache
+*.o
+*.so
+*.out
