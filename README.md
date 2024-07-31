@@ -1,11 +1,8 @@
 # Geolocation anonymizer
-A project that aims to develop an anonymization service for user geolocation data that is sent to third-party servers, based on _fully homomorphic encryption_ (FHE) and _k-anonimity_ techniques.
+A project that aims to develop an anonymization service for user geolocation data that is sent to third-party servers, based on _fully homomorphic encryption_ (FHE) and _k-anonimity_ techniques. It is composed of a user application which has access to the user device's GPS data, and a server application which performs a homomorphic comparison operation over encrypted position data from multiple users, returning to each user a location that is k-anonymous with respect to the other users of the service in that same area. Clients can then use that location as a replacement for their own coordinates when querying some third-party geolocation service, knowing that their identity will be obfuscated.
 
 ## User application
-TODO
+The user application is (at the moment) a command line program that uses the Microsoft SEAL library to implement homomorphic encryption functions based on the BFV algorithm. It connects to the anonimyzer service to send its own encoded and encrypted location, based on region data collected from Open Street Map, and receive a representation of the smallest region in which there are at least k users, including the client itself. The client then uses that information to contact a third party service, which in this case is a server that accepts Overpass API queries.
 
 ## Anonymizer service
-TODO
-
-## Relay service
-TODO
+The anonymizer is a Flask server that periodically receives encrypted approximate locations from clients, encoded as integer arrays. It then performs a comparison operation over all the arrays received from clients against the threshold k, and returns an encrypted array containing the result of the comparison, which marks the regions where the k-anonimity property is currently holding. This approach allows users to achieve k-anonimity in a centralized way, without having to disclose their location to the anonymizer.
