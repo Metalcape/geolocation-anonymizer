@@ -7,7 +7,7 @@
 #define POLY_MOD_DEG 15
 #define PLAIN_MOD 65537
 
-class HEContext {
+class BFVContext {
 public:
     seal::EncryptionParameters parms;
     seal::SEALContext context;
@@ -15,16 +15,10 @@ public:
     seal::SecretKey secret_key;
     seal::PublicKey public_key;
     seal::RelinKeys relin_keys;
-
-    HEContext(const seal::EncryptionParameters &parms);
-};
-
-class HE : public HEContext {
-public:
     seal::Encryptor encryptor;
     seal::Evaluator evaluator;
     seal::Decryptor decryptor;
     seal::BatchEncoder batch_encoder;
 
-    HE(const seal::EncryptionParameters &parms);
+    BFVContext(const seal::EncryptionParameters &parms);
 };
