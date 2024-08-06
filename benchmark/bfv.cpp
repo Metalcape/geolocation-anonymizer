@@ -104,8 +104,9 @@ void lt_range_mt(BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &r
     std::vector<Ciphertext> equals(y);
 
     // Loop with concurrent execution
-    std::for_each(std::execution::par_unseq, equals.begin(), equals.end(), [&](Ciphertext &row) {
-        auto i = std::find(equals.begin(), equals.end(), row) - equals.begin();
+    std::for_each(std::execution::par, equals.begin(), equals.end(), [&](Ciphertext &row) {
+        // auto i = std::find(equals.begin(), equals.end(), row) - equals.begin();
+        auto i = &row - &equals[0];
         Plaintext ptx(std::to_string(i));
         equate_plain(bfv, x, ptx, row);
     });
