@@ -8,19 +8,18 @@
 
 using namespace seal;
 
+// Generate data
+const unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG - 2);
+const auto data = generate_dataset(N_USERS, number_of_elements, 0.1);
+
 class BM_SEAL_Comparison {
 private:
     BFVContext bfv;
-    std::vector<std::vector<uint64_t>> data;
     std::vector<Ciphertext> enc_data;
     Ciphertext aggregate, filtered, lt;
 
 public:
-    BM_SEAL_Comparison() : bfv(get_default_parameters()) {
-        // Generate data
-        unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG - 2);
-        this->data = generate_dataset(N_USERS, number_of_elements, 0.1);
-        
+    BM_SEAL_Comparison() : bfv(get_default_parameters()) {       
         // Encrypt
         this->enc_data = encrypt_data(bfv, data);
 
@@ -63,7 +62,7 @@ int main(int argc, char** argv) {
             } else {
                 BENCHMARK(BM_SEAL_Comparison::bfv_comparison_st)->DenseRange(10, 20, 1);
             }
-            
+
             break;
         }
     }
