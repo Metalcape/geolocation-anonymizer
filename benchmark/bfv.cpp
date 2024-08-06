@@ -40,20 +40,6 @@ std::vector<Ciphertext> encrypt_data(BFVContext &bfv, std::vector<std::vector<ui
     return enc_data;
 }
 
-void print_plaintext(BFVContext &bfv, const Plaintext &ptx, size_t n) {
-    std::vector<uint64_t> decoded_ptx;
-    bfv.batch_encoder.decode(ptx, decoded_ptx);
-    for(int i = 0; i < n; ++i)
-        std::cout << decoded_ptx[i] << ' ';
-    std::cout << std::endl;
-}
-
-void print_ciphertext(BFVContext &bfv, const Ciphertext &ctx, size_t n) {
-    Plaintext ptx;
-    bfv.decryptor.decrypt(ctx, ptx);
-    print_plaintext(bfv, ptx, n);
-}
-
 void mod_exp(BFVContext &bfv, const Ciphertext &x, uint64_t exponent, Ciphertext &result) {
     Plaintext plain_one("1");
     Ciphertext base(x);

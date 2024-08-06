@@ -1,7 +1,9 @@
 #pragma once
 
 #include <SEAL-4.1/seal/seal.h>
+#include <iostream>
 #include <vector>
+#include <random>
 
 #define N_MULT 20
 #define POLY_MOD_DEG 15
