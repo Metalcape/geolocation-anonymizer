@@ -1,5 +1,8 @@
 #include "bfv.h"
 
+// Global constants
+const extern auto cpu_count;
+
 // Encryption functions
 seal::EncryptionParameters get_default_parameters();
 std::vector<seal::Ciphertext> encrypt_data(BFVContext &bfv, std::vector<std::vector<uint64_t>> data);

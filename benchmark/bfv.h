@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
+#include <thread>
 
 #define N_MULT 20
 #define POLY_MOD_DEG 15
