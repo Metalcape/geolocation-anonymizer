@@ -1,8 +1,14 @@
 #include "bfv.h"
 
+namespace seal {
+    bool operator==(const Ciphertext& ctx1, const Ciphertext& ctx2) {
+        return ctx1.parms_id() == ctx2.parms_id() && ctx1.data() == ctx2.data();
+    }
+}
+
 using namespace seal;
 
-const auto cpu_count = std::thread::hardware_concurrency();
+const unsigned int cpu_count = std::thread::hardware_concurrency();
 
 // Constructors
 BFVContext::BFVContext(const seal::EncryptionParameters &parms) : 
@@ -93,37 +99,16 @@ void lt_range(BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &resu
     bfv.evaluator.add_many(equals, result);
 }
 
-std::vector<Ciphertext> __lt_partial_comparison(BFVContext &bfv, const Ciphertext &x, std::vector<Ciphertext> &dest, uint64_t start, uint64_t end) {
-    // Range comparison from 0 to threshold - 1
-    // Equals [i][j] == 1 if x[j] == i, 0 otherwise
-    for(uint64_t i = start; i < end; ++i) {
-        Plaintext ptx(std::to_string(i));
-        equate_plain(bfv, x, ptx, dest[i]);
-    }
-}
-
 void lt_range_mt(BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &result) {
-    // Keep track of threads
-    std::vector<std::thread> threads;
-
-    // Number of rows per thread; must be at least 1.
-    unsigned int rows_per_thread = y / cpu_count;
-    rows_per_thread = (rows_per_thread >= 1 ? rows_per_thread : 1);
-
     // Vector to store results
     std::vector<Ciphertext> equals(y);
 
-    // Initialize threads
-    for(uint64_t i = 0; i < y; ++i) {
-        auto start = i * rows_per_thread;
-        auto end = start + rows_per_thread;
-        threads[i] = std::thread(__lt_partial_comparison, bfv, x, equals, start, end);
-    }
-
-    // Wait for all threads to finish
-    for(int i = 0; i < y; ++i) {
-        threads[i].join();
-    }
+    // Loop with concurrent execution
+    std::for_each(std::execution::par_unseq, equals.begin(), equals.end(), [&](Ciphertext &row) {
+        auto i = std::find(equals.begin(), equals.end(), row) - equals.begin();
+        Plaintext ptx(std::to_string(i));
+        equate_plain(bfv, x, ptx, row);
+    });
 
     // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
     bfv.evaluator.add_many(equals, result);

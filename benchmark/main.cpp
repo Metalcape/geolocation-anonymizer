@@ -32,14 +32,44 @@ public:
         this->bfv.evaluator.relinearize_inplace(this->filtered, this->bfv.relin_keys);
     }
 
-    static void bfv_comparison(benchmark::State& state) {
-        std::cout << "Running benchmark with K = " << state.range(0) << std::endl;
+    static void bfv_comparison_st(benchmark::State& state) {
+        std::cout << "Running single thread benchmark with K = " << state.range(0) << std::endl;
         BM_SEAL_Comparison bm_seal;
         for (auto _ : state)
             lt_range(bm_seal.bfv, bm_seal.filtered, state.range(0), bm_seal.lt);
     }
+
+    static void bfv_comparison_mt(benchmark::State& state) {
+        std::cout << "Running multi thread benchmark with K = " << state.range(0) << std::endl;
+        BM_SEAL_Comparison bm_seal;
+        for (auto _ : state)
+            lt_range_mt(bm_seal.bfv, bm_seal.filtered, state.range(0), bm_seal.lt);
+    }
 };
 
-BENCHMARK(BM_SEAL_Comparison::bfv_comparison)->DenseRange(10, 20, 1);
+int main(int argc, char** argv) {
 
-BENCHMARK_MAIN();
+    std::vector<std::string> args;
+    for(int i = 0; i < argc; ++i) {
+        args.push_back(std::string(argv[i]));
+    }
+
+    for(std::string arg : args) {
+        if(arg.find("--type") != std::string::npos) {
+            if (arg == "--type=mt") {
+                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_mt)->DenseRange(10, 20, 1);
+            } else if (arg == "--type=st") {
+                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_st)->DenseRange(10, 20, 1);
+            } else {
+                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_st)->DenseRange(10, 20, 1);
+            }
+            
+            break;
+        }
+    }
+
+    benchmark::Initialize(&argc, argv);
+    benchmark::RunSpecifiedBenchmarks();
+
+    return 0;
+}
