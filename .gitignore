@@ -6,3 +6,4 @@ out.txt
 *.o
 *.so
 *.out
+.gdb_history

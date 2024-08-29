@@ -66,6 +66,11 @@ void mod_exp(BFVContext &bfv, const Ciphertext &x, uint64_t exponent, Ciphertext
         bfv.evaluator.relinearize_inplace(base, bfv.relin_keys);
         // std::cout << bfv.decryptor.invariant_noise_budget(base) << std::endl;
     }
+
+    if(bfv.decryptor.invariant_noise_budget(result) <= 0) {
+        std::cout << "mod_exp: out of noise budget while calculating exp(X, " << exponent << ")!" << std::endl;
+        exit(-1);
+    }
 }
 
 void equate_plain(BFVContext &bfv, const Ciphertext &x, const Plaintext &y, Ciphertext &result) {
@@ -113,4 +118,114 @@ void lt_range_mt(BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &r
 
     // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
     bfv.evaluator.add_many(equals, result);
+}
+
+constexpr int64_t mod_exp(int64_t base, int64_t exponent, int64_t p) {
+    int64_t result = 1;
+    while (exponent > 0)
+    {
+        if(exponent % 2 == 1) {
+            result = (result * base) % p;
+        }
+        exponent >>= 1;
+        base = (base * base) % p;
+    }
+
+    return result;
+}
+
+int64_t mod_sum(const int64_t& a, const int64_t& b) {
+    return (a + b) % PLAIN_MOD;
+}
+
+void calc_univ_poly_coefficients(std::array<int64_t, N_POLY_TERMS> &result) {
+    auto *terms = new std::array<int64_t, N_POLY_TERMS - 1>();
+
+    for (int i = 0; i < PLAIN_MOD; i += 2) {
+        int64_t exponent = (i == PLAIN_MOD - 1) ? (PLAIN_MOD - i - 1) : (PLAIN_MOD - i);
+        std::for_each(std::execution::par, terms->begin(), terms->end(), [&](int64_t &term) {
+            auto a = (&term - &(*terms->begin())) + 1;
+            term = mod_exp(a, exponent, PLAIN_MOD);
+        });
+
+        result[i/2] = std::accumulate(terms->begin(), terms->end(), 0, mod_sum);
+    }
+
+    delete terms;
+}
+
+void eval_poly_term(BFVContext &bfv, int64_t coeff, const Ciphertext &z, int i, Ciphertext &result) {
+    Ciphertext z_exp;
+    Plaintext alpha(std::to_string(coeff));
+
+    mod_exp(bfv, z, 2*i, z_exp);
+    bfv.evaluator.multiply_plain_inplace(z_exp, alpha);
+    result = z_exp;
+}
+
+void lt_univariate(BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {
+    Ciphertext z = x;
+    bfv.evaluator.sub_inplace(z, y);
+
+    // constexpr std::array<int64_t, N_POLY_TERMS> coefficients = calc_univ_poly_coefficients();
+    std::vector<Ciphertext> polynomial_terms(N_POLY_TERMS - 1);
+
+    // Keep track of threads
+    // std::vector<std::thread> threads(N_POLY_TERMS - 1);
+
+    // // Calculate sub-vector size
+    // unsigned int terms_per_thread = (N_POLY_TERMS - 1) / cpu_count;
+    // terms_per_thread = (terms_per_thread >= 1 ? terms_per_thread : 1);
+
+    // for(int i = 0; i < N_POLY_TERMS - 1; ++i) {
+    //     threads[i] = std::thread(eval_poly_term, std::ref(bfv), std::cref(z), i, std::ref(polynomial_terms[i]));
+    // }
+
+    // // Run threads
+    // std::vector<Ciphertext *> results;
+    // int start = 0;
+    // int end = terms_per_thread;
+    // while(end < N_POLY_TERMS - 1) {
+    //     Ciphertext *res = new Ciphertext();
+    //     threads.push_back(std::thread(eval_poly_terms, bfv, z, coefficients, start, end, res));
+    //     results.push_back(res);
+    //     start = end;
+    //     end += terms_per_thread;
+    // }
+    // Ciphertext *last = new Ciphertext();
+    // threads.push_back(std::thread(eval_poly_terms, bfv, z, coefficients, start, N_POLY_TERMS - 1, last));
+    // results.push_back(last);
+
+    // Join threads
+    // for(std::thread &t: threads) {
+    //     t.join();
+    // }
+
+    std::cout << "Poly eval start" << std::endl;
+
+    std::for_each(std::execution::par_unseq, polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &term) {
+        auto i = &term - &polynomial_terms[0];
+
+        // Optimization: if the coefficient is zero, skip calculating the modular exponent
+        // Also avoids std::logic_error due to transparent ciphertext
+        if(coefficients[i] == 0) {
+            bfv.encryptor.encrypt_zero(term);
+        } else {
+            Plaintext alpha(std::to_string(coefficients[i]));
+            mod_exp(bfv, z, 2*i, term);
+            bfv.evaluator.multiply_plain_inplace(term, alpha);
+        }
+    });
+
+    std::cout << "Poly eval end" << std::endl;
+
+    Ciphertext second_term;
+    bfv.evaluator.add_many(polynomial_terms, second_term);
+    bfv.evaluator.multiply_inplace(second_term, z);
+    Ciphertext first_term;
+    Plaintext alpha_zero(std::to_string(coefficients.back()));
+    mod_exp(bfv, z, PLAIN_MOD - 1, first_term);
+    bfv.evaluator.multiply_plain_inplace(first_term, alpha_zero);
+
+    bfv.evaluator.add(result, first_term, second_term);
 }
