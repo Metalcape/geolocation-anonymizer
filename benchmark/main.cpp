@@ -77,14 +77,19 @@ public:
 
         // Sum everything
         // this->bfv.evaluator.add_many(this->enc_data, this->aggregate);
+
+        // aggregate.to_device_inplace();
         bfv.encryptor.encrypt_zero_asymmetric(aggregate);
         std::for_each(this->enc_data.begin(), this->enc_data.end(), [&](troy::Ciphertext &ctx) {
-            bfv.evaluator.add_inplace(this->aggregate, ctx);
+            bfv.evaluator.add_inplace(this->aggregate, ctx.to_device());
         });
+        // aggregate.to_host_inplace();
 
         // Filter by user
-        this->bfv.evaluator.multiply(this->enc_data[USER_IDX], this->aggregate, this->filtered);
-        this->bfv.evaluator.relinearize_inplace(this->filtered, this->bfv.relin_keys);
+        troy::Ciphertext user_data = this->enc_data[USER_IDX].to_device();
+        troy::Ciphertext result = this->bfv.evaluator.multiply_new(user_data, aggregate);
+        filtered = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
+        // filtered.to_host_inplace();
     }
 
     static void bfv_comparison_gpu(benchmark::State& state) {

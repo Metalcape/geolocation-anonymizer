@@ -17,11 +17,16 @@ namespace gpu {
         if(utils::device_count() > 0) {
             context->to_device_inplace();
             batch_encoder.to_device_inplace();
+            encryptor.to_device_inplace();
+            decryptor.to_device_inplace();
+            keygen.to_device_inplace();
+            secret_key.to_device_inplace();
         }
 
+        evaluator = Evaluator(context);
         public_key = keygen.create_public_key(false);
         relin_keys = keygen.create_relin_keys(false);
-        this->encryptor.set_public_key(this->public_key);
+        encryptor.set_public_key(public_key);
     }
 
     // Functions
@@ -38,32 +43,33 @@ namespace gpu {
     std::vector<Ciphertext> encrypt_data(gpu::BFVContext &bfv, std::vector<std::vector<uint64_t>> data) {
         std::vector<Ciphertext> enc_data(data.size());
         for(int i = 0; i < enc_data.size(); ++i) {
-            Plaintext pt;
-            Ciphertext ct;
-            bfv.batch_encoder.encode(data[i], pt);
-            bfv.encryptor.encrypt_asymmetric(pt, ct);
-            enc_data[i] = ct;
+            Plaintext pt = bfv.batch_encoder.encode_new(data[i]);
+            Ciphertext ct = bfv.encryptor.encrypt_asymmetric_new(pt.to_device());
+            enc_data[i] = ct.to_host();
         }
         return enc_data;
     }
 
     void mod_exp(gpu::BFVContext &bfv, const Ciphertext &x, uint64_t exponent, Ciphertext &result) {
-        Plaintext plain_one;
-        bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1), plain_one);
+        Plaintext plain_one = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1)).to_device();
         Ciphertext base(x);
-        bfv.encryptor.encrypt_asymmetric(plain_one, result);
+        result = bfv.encryptor.encrypt_asymmetric_new(plain_one);
 
         // Compute modular exponent by square and multiply
         // evaluator.exponentiate_inplace(result, P - 1, relin_keys);
+        if(!result.on_device())
+            result.to_device_inplace();
+        if(!base.on_device())
+            base.to_device_inplace();
         while (exponent > 0)
         {
             if(exponent % 2 == 1) {
                 bfv.evaluator.multiply_inplace(result, base);
-                bfv.evaluator.relinearize_inplace(result, bfv.relin_keys);
+                result = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
             }
             exponent >>= 1;
             bfv.evaluator.square_inplace(base);
-            bfv.evaluator.relinearize_inplace(base, bfv.relin_keys);
+            base = bfv.evaluator.relinearize_new(base, bfv.relin_keys);
             // std::cout << bfv.decryptor.invariant_noise_budget(base) << std::endl;
         }
 
@@ -77,10 +83,16 @@ namespace gpu {
         // Equate
         // EQ(x, y) = 1 - (x - y)^p-1
 
-        Plaintext plain_one;
-        bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1), plain_one);
-        Ciphertext base;
-        bfv.evaluator.sub_plain(x, y, base);
+        Plaintext plain_one = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1));
+        Plaintext Y = y;
+        Ciphertext X = x;
+
+        if(!X.on_device())
+            X.to_device_inplace();
+        if(!Y.on_device())
+            Y.to_device_inplace();
+
+        Ciphertext base = bfv.evaluator.sub_plain_new(X, Y);
 
         uint64_t exponent = PLAIN_MOD - 1;
         mod_exp(bfv, base, exponent, result);
@@ -96,8 +108,7 @@ namespace gpu {
         std::vector<Ciphertext> equals(y);
 
         for(uint64_t i = 0; i < y; ++i) {
-            Plaintext ptx;
-            bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i), ptx);
+            Plaintext ptx = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i));
             equate_plain(bfv, x, ptx, equals[i]);
             // print_ciphertext(he, equals[i], 14);
         }
@@ -105,6 +116,7 @@ namespace gpu {
         // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
         bfv.encryptor.encrypt_zero_asymmetric(result);
         std::for_each(equals.begin(), equals.end(), [&](Ciphertext &ctx) {
+            ctx.to_device_inplace();
             bfv.evaluator.add_inplace(result, ctx);
         });
     }
@@ -117,14 +129,14 @@ namespace gpu {
         std::for_each(std::execution::par, equals.begin(), equals.end(), [&](Ciphertext &row) {
             // auto i = std::find(equals.begin(), equals.end(), row) - equals.begin();
             auto i = &row - &equals[0];
-            Plaintext ptx;
-            bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i), ptx);
+            Plaintext ptx = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i));
             equate_plain(bfv, x, ptx, row);
         });
 
         // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
         bfv.encryptor.encrypt_zero_asymmetric(result);
         std::for_each(equals.begin(), equals.end(), [&](Ciphertext &ctx) {
+            ctx.to_device_inplace();
             bfv.evaluator.add_inplace(result, ctx);
         });
     }
@@ -169,13 +181,17 @@ namespace gpu {
         bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coeff), alpha);
 
         mod_exp(bfv, z, 2*i, z_exp);
+        z_exp.to_device_inplace();
+        alpha.to_device_inplace();
         bfv.evaluator.multiply_plain_inplace(z_exp, alpha);
         result = z_exp;
     }
 
     void lt_univariate(gpu::BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {
-        Ciphertext z = x;
-        bfv.evaluator.sub_inplace(z, y);
+        Ciphertext z = x, y_copy = y;
+        z.to_device_inplace();
+        y_copy.to_device_inplace();
+        bfv.evaluator.sub_inplace(z, y_copy);
 
         // constexpr std::array<int64_t, N_POLY_TERMS> coefficients = calc_univ_poly_coefficients();
         std::vector<Ciphertext> polynomial_terms(N_POLY_TERMS - 1);
@@ -224,6 +240,8 @@ namespace gpu {
                 Plaintext alpha;
                 bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[i]), alpha);
                 mod_exp(bfv, z, 2*i, term);
+                alpha.to_device_inplace();
+                term.to_device_inplace();
                 bfv.evaluator.multiply_plain_inplace(term, alpha);
             }
         });
@@ -231,8 +249,10 @@ namespace gpu {
         std::cout << "Poly eval end" << std::endl;
 
         Ciphertext second_term;
+        second_term.to_device_inplace();
         bfv.encryptor.encrypt_zero_asymmetric(second_term);
         std::for_each(polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &ctx) {
+            ctx.to_device_inplace();
             bfv.evaluator.add_inplace(second_term, ctx);
         });
         bfv.evaluator.multiply_inplace(second_term, z);
@@ -241,9 +261,12 @@ namespace gpu {
         bfv.encryptor.encrypt_zero_asymmetric(first_term);
         Plaintext alpha_zero;
         bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients.back()), alpha_zero);
+        first_term.to_device_inplace();
+        alpha_zero.to_device_inplace();
         mod_exp(bfv, z, PLAIN_MOD - 1, first_term);
         bfv.evaluator.multiply_plain_inplace(first_term, alpha_zero);
 
+        result.to_device_inplace();
         bfv.evaluator.add(result, first_term, second_term);
     }
 }
