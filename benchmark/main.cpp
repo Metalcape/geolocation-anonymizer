@@ -1,4 +1,5 @@
 #include "libbfv.h"
+#include "libbfvcuda.h"
 
 #include <benchmark/benchmark.h>
 #include <vector>
@@ -6,22 +7,20 @@
 #define N_USERS 100
 #define USER_IDX 0
 
-using namespace seal;
-
 // Generate data
 const unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG - 2);
 const auto data = generate_dataset(N_USERS, number_of_elements, 0.1);
 
 class BM_SEAL_Comparison {
 private:
-    BFVContext bfv;
-    std::vector<Ciphertext> enc_data;
-    Ciphertext aggregate, filtered, lt;
+    cpu::BFVContext bfv;
+    std::vector<seal::Ciphertext> enc_data;
+    seal::Ciphertext aggregate, filtered, lt;
 
 public:
-    BM_SEAL_Comparison() : bfv(get_default_parameters()) {       
+    BM_SEAL_Comparison() : bfv(cpu::get_default_parameters()) {       
         // Encrypt
-        this->enc_data = encrypt_data(bfv, data);
+        this->enc_data = cpu::encrypt_data(bfv, data);
 
         // Sum everything
         this->bfv.evaluator.add_many(this->enc_data, this->aggregate);
@@ -50,18 +49,68 @@ public:
         BM_SEAL_Comparison bm_seal;
 
         // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
-        Plaintext k("42");
-        Ciphertext y;
+        seal::Plaintext k("42");
+        seal::Ciphertext y;
         bm_seal.bfv.encryptor.encrypt(k, y);
 
         // Precompute coefficients
         auto *coefficients = new std::array<int64_t, N_POLY_TERMS>();
-        calc_univ_poly_coefficients(*coefficients);
+        cpu::calc_univ_poly_coefficients(*coefficients);
 
         for (auto _ : state)
             lt_univariate(bm_seal.bfv, *coefficients, bm_seal.filtered, y, bm_seal.lt);
 
         delete coefficients;
+    }
+};
+
+class BM_Troy_Comparison {
+private:
+    gpu::BFVContext bfv;
+    std::vector<troy::Ciphertext> enc_data;
+    troy::Ciphertext aggregate, filtered, lt;
+
+public:
+    BM_Troy_Comparison() : bfv(gpu::get_default_parameters()) {       
+        // Encrypt
+        this->enc_data = encrypt_data(bfv, data);
+
+        // Sum everything
+        // this->bfv.evaluator.add_many(this->enc_data, this->aggregate);
+        bfv.encryptor.encrypt_zero_asymmetric(aggregate);
+        std::for_each(this->enc_data.begin(), this->enc_data.end(), [&](troy::Ciphertext &ctx) {
+            bfv.evaluator.add_inplace(this->aggregate, ctx);
+        });
+
+        // Filter by user
+        this->bfv.evaluator.multiply(this->enc_data[USER_IDX], this->aggregate, this->filtered);
+        this->bfv.evaluator.relinearize_inplace(this->filtered, this->bfv.relin_keys);
+    }
+
+    static void bfv_comparison_gpu(benchmark::State& state) {
+        std::cout << "Running GPU benchmark with K = " << state.range(0) << std::endl;
+        BM_Troy_Comparison bm_troy;
+        for (auto _ : state)
+            gpu::lt_range_mt(bm_troy.bfv, bm_troy.filtered, state.range(0), bm_troy.lt);
+    }
+
+    static void bfv_comparison_gpu_poly(benchmark::State& state) {
+        std::cout << "Running GPU univariate polynomial benchmark with K = " << state.range(0) << std::endl;
+        BM_Troy_Comparison bm_troy;
+
+        // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
+        troy::Plaintext k;
+        bm_troy.bfv.batch_encoder.encode(std::vector<uint64_t>(bm_troy.bfv.batch_encoder.slot_count(), 42), k);
+        troy::Ciphertext y;
+        bm_troy.bfv.encryptor.encrypt_asymmetric(k, y);
+
+        // Precompute coefficients
+        auto *coefficients = new std::array<int64_t, N_POLY_TERMS>();
+        gpu::calc_univ_poly_coefficients(*coefficients);
+
+        for (auto _ : state)
+            gpu::lt_univariate(bm_troy.bfv, *coefficients, bm_troy.filtered, y, bm_troy.lt);
+
     }
 };
 
@@ -82,6 +131,10 @@ int main(int argc, char** argv) {
                 BENCHMARK(BM_SEAL_Comparison::bfv_comparison_st)->DenseRange(10, 20, 1);
             } else if (arg == "--type=poly") {
                 BENCHMARK(BM_SEAL_Comparison::bfv_comparison_poly);
+            } else if (arg == "--type=gpu") {
+                BENCHMARK(BM_Troy_Comparison::bfv_comparison_gpu)->DenseRange(10, 20, 1);
+            } else if (arg == "--type=poly_gpu") {
+                BENCHMARK(BM_Troy_Comparison::bfv_comparison_gpu_poly);
             }
             break;
         }

@@ -14,18 +14,20 @@
 #define PLAIN_MOD 65537
 #define N_POLY_TERMS PLAIN_MOD/2+1
 
-class BFVContext {
-public:
-    seal::EncryptionParameters parms;
-    seal::SEALContext context;
-    seal::KeyGenerator keygen;
-    seal::SecretKey secret_key;
-    seal::PublicKey public_key;
-    seal::RelinKeys relin_keys;
-    seal::Encryptor encryptor;
-    seal::Evaluator evaluator;
-    seal::Decryptor decryptor;
-    seal::BatchEncoder batch_encoder;
+namespace cpu {
+    class BFVContext {
+    public:
+        seal::EncryptionParameters parms;
+        seal::SEALContext context;
+        seal::KeyGenerator keygen;
+        seal::SecretKey secret_key;
+        seal::PublicKey public_key;
+        seal::RelinKeys relin_keys;
+        seal::Encryptor encryptor;
+        seal::Evaluator evaluator;
+        seal::Decryptor decryptor;
+        seal::BatchEncoder batch_encoder;
 
-    BFVContext(const seal::EncryptionParameters &parms);
-};
+        BFVContext(const seal::EncryptionParameters &parms);
+    };
+}

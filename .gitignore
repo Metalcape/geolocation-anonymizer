@@ -7,3 +7,4 @@ out.txt
 *.so
 *.out
 .gdb_history
+/build

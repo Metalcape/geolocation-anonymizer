@@ -1,5 +1,7 @@
-
 #include "bfv.h"
+#include "bfvcuda.h"
+
+const unsigned int cpu_count = std::thread::hardware_concurrency();
 
 std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned int cols, double density) {
     if (density < 0.0 || density > 1.0) {
@@ -21,7 +23,7 @@ std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned 
     return matrix;
 }
 
-void print_plaintext(BFVContext &bfv, const seal::Plaintext &ptx, size_t n) {
+void print_plaintext(cpu::BFVContext &bfv, const seal::Plaintext &ptx, size_t n) {
     std::vector<uint64_t> decoded_ptx;
     bfv.batch_encoder.decode(ptx, decoded_ptx);
     for(int i = 0; i < n; ++i)
@@ -29,8 +31,22 @@ void print_plaintext(BFVContext &bfv, const seal::Plaintext &ptx, size_t n) {
     std::cout << std::endl;
 }
 
-void print_ciphertext(BFVContext &bfv, const seal::Ciphertext &ctx, size_t n) {
+void print_ciphertext(cpu::BFVContext &bfv, const seal::Ciphertext &ctx, size_t n) {
     seal::Plaintext ptx;
+    bfv.decryptor.decrypt(ctx, ptx);
+    print_plaintext(bfv, ptx, n);
+}
+
+void print_plaintext(gpu::BFVContext &bfv, const troy::Plaintext &ptx, size_t n) {
+    std::vector<uint64_t> decoded_ptx;
+    bfv.batch_encoder.decode(ptx, decoded_ptx);
+    for(int i = 0; i < n; ++i)
+        std::cout << decoded_ptx[i] << ' ';
+    std::cout << std::endl;
+}
+
+void print_ciphertext(gpu::BFVContext &bfv, const troy::Ciphertext &ctx, size_t n) {
+    troy::Plaintext ptx;
     bfv.decryptor.decrypt(ctx, ptx);
     print_plaintext(bfv, ptx, n);
 }
