@@ -61,13 +61,15 @@ namespace gpu {
             result.to_device_inplace();
         if(!base.on_device())
             base.to_device_inplace();
-        while (exponent > 0)
+
+        uint64_t exp = exponent;
+        while (exp > 0)
         {
-            if(exponent % 2 == 1) {
+            if(exp % 2 == 1) {
                 bfv.evaluator.multiply_inplace(result, base);
                 result = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
             }
-            exponent >>= 1;
+            exp >>= 1;
             bfv.evaluator.square_inplace(base);
             base = bfv.evaluator.relinearize_new(base, bfv.relin_keys);
             // std::cout << bfv.decryptor.invariant_noise_budget(base) << std::endl;
@@ -189,8 +191,11 @@ namespace gpu {
 
     void lt_univariate(gpu::BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {
         Ciphertext z = x, y_copy = y;
-        z.to_device_inplace();
-        y_copy.to_device_inplace();
+        if(!z.on_device())
+            z.to_device_inplace();
+        if(!y_copy.on_device())
+            y_copy.to_device_inplace();
+        
         bfv.evaluator.sub_inplace(z, y_copy);
 
         // constexpr std::array<int64_t, N_POLY_TERMS> coefficients = calc_univ_poly_coefficients();
@@ -229,7 +234,7 @@ namespace gpu {
 
         std::cout << "Poly eval start" << std::endl;
 
-        std::for_each(std::execution::par_unseq, polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &term) {
+        std::for_each(polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &term) {
             auto i = &term - &polynomial_terms[0];
 
             // Optimization: if the coefficient is zero, skip calculating the modular exponent
@@ -237,36 +242,25 @@ namespace gpu {
             if(coefficients[i] == 0) {
                 bfv.encryptor.encrypt_zero_asymmetric(term);
             } else {
-                Plaintext alpha;
-                bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[i]), alpha);
+                Plaintext alpha = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[i]));
                 mod_exp(bfv, z, 2*i, term);
-                alpha.to_device_inplace();
-                term.to_device_inplace();
                 bfv.evaluator.multiply_plain_inplace(term, alpha);
             }
         });
 
         std::cout << "Poly eval end" << std::endl;
 
-        Ciphertext second_term;
-        second_term.to_device_inplace();
-        bfv.encryptor.encrypt_zero_asymmetric(second_term);
+        Ciphertext second_term = bfv.encryptor.encrypt_zero_asymmetric_new();
         std::for_each(polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &ctx) {
-            ctx.to_device_inplace();
             bfv.evaluator.add_inplace(second_term, ctx);
         });
         bfv.evaluator.multiply_inplace(second_term, z);
         
-        Ciphertext first_term;
-        bfv.encryptor.encrypt_zero_asymmetric(first_term);
-        Plaintext alpha_zero;
-        bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients.back()), alpha_zero);
-        first_term.to_device_inplace();
-        alpha_zero.to_device_inplace();
+        Ciphertext first_term = bfv.encryptor.encrypt_zero_asymmetric_new();
+        Plaintext alpha_zero = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients.back()));
         mod_exp(bfv, z, PLAIN_MOD - 1, first_term);
         bfv.evaluator.multiply_plain_inplace(first_term, alpha_zero);
-
-        result.to_device_inplace();
+        result = bfv.encryptor.encrypt_zero_asymmetric_new();
         bfv.evaluator.add(result, first_term, second_term);
     }
 }

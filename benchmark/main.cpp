@@ -12,12 +12,11 @@ const unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG - 2)
 const auto data = generate_dataset(N_USERS, number_of_elements, 0.1);
 
 class BM_SEAL_Comparison {
-private:
+public:
     cpu::BFVContext bfv;
     std::vector<seal::Ciphertext> enc_data;
     seal::Ciphertext aggregate, filtered, lt;
 
-public:
     BM_SEAL_Comparison() : bfv(cpu::get_default_parameters()) {       
         // Encrypt
         this->enc_data = cpu::encrypt_data(bfv, data);
@@ -29,48 +28,14 @@ public:
         this->bfv.evaluator.multiply(this->enc_data[USER_IDX], this->aggregate, this->filtered);
         this->bfv.evaluator.relinearize_inplace(this->filtered, this->bfv.relin_keys);
     }
-
-    static void bfv_comparison_st(benchmark::State& state) {
-        std::cout << "Running single thread benchmark with K = " << state.range(0) << std::endl;
-        BM_SEAL_Comparison bm_seal;
-        for (auto _ : state)
-            lt_range(bm_seal.bfv, bm_seal.filtered, state.range(0), bm_seal.lt);
-    }
-
-    static void bfv_comparison_mt(benchmark::State& state) {
-        std::cout << "Running multi thread benchmark with K = " << state.range(0) << std::endl;
-        BM_SEAL_Comparison bm_seal;
-        for (auto _ : state)
-            lt_range_mt(bm_seal.bfv, bm_seal.filtered, state.range(0), bm_seal.lt);
-    }
-
-    static void bfv_comparison_poly(benchmark::State& state) {
-        std::cout << "Running multi thread univariate polynomial benchmark" << std::endl;
-        BM_SEAL_Comparison bm_seal;
-
-        // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
-        seal::Plaintext k("42");
-        seal::Ciphertext y;
-        bm_seal.bfv.encryptor.encrypt(k, y);
-
-        // Precompute coefficients
-        auto *coefficients = new std::array<int64_t, N_POLY_TERMS>();
-        cpu::calc_univ_poly_coefficients(*coefficients);
-
-        for (auto _ : state)
-            lt_univariate(bm_seal.bfv, *coefficients, bm_seal.filtered, y, bm_seal.lt);
-
-        delete coefficients;
-    }
 };
 
 class BM_Troy_Comparison {
-private:
+public:
     gpu::BFVContext bfv;
     std::vector<troy::Ciphertext> enc_data;
     troy::Ciphertext aggregate, filtered, lt;
 
-public:
     BM_Troy_Comparison() : bfv(gpu::get_default_parameters()) {       
         // Encrypt
         this->enc_data = encrypt_data(bfv, data);
@@ -91,33 +56,114 @@ public:
         filtered = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
         // filtered.to_host_inplace();
     }
+};
 
-    static void bfv_comparison_gpu(benchmark::State& state) {
-        std::cout << "Running GPU benchmark with K = " << state.range(0) << std::endl;
-        BM_Troy_Comparison bm_troy;
-        for (auto _ : state)
-            gpu::lt_range_mt(bm_troy.bfv, bm_troy.filtered, state.range(0), bm_troy.lt);
+class RangeFixtureCpu : public benchmark::Fixture {
+public:
+    BM_SEAL_Comparison *bm_seal;
+    
+    void SetUp(::benchmark::State& state) {
+        bm_seal = new BM_SEAL_Comparison();
     }
 
-    static void bfv_comparison_gpu_poly(benchmark::State& state) {
-        std::cout << "Running GPU univariate polynomial benchmark with K = " << state.range(0) << std::endl;
+    void TearDown(::benchmark::State& state) {
+        delete bm_seal;
+    }
+};
+
+class PolyFixtureCpu : public benchmark::Fixture {
+public:
+    BM_SEAL_Comparison *bm_seal;
+    seal::Ciphertext *y;
+    std::array<int64_t, N_POLY_TERMS> *coefficients;
+
+    void SetUp(::benchmark::State& state) {
+        BM_SEAL_Comparison bm_seal;
+
+        // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
+        seal::Plaintext k("42");
+        y = new seal::Ciphertext();
+        bm_seal.bfv.encryptor.encrypt(k, *y);
+
+        // Precompute coefficients
+        coefficients = new std::array<int64_t, N_POLY_TERMS>();
+        cpu::calc_univ_poly_coefficients(*coefficients);
+    }
+
+    void TearDown(::benchmark::State& state) {
+        delete bm_seal;
+        delete y;
+        delete coefficients;
+    }
+};
+
+class RangeFixtureGpu : public benchmark::Fixture {
+public:
+    BM_Troy_Comparison *bm_troy;
+
+    void SetUp(::benchmark::State& state) {
+        bm_troy = new BM_Troy_Comparison;
+    }
+
+    void TearDown(::benchmark::State& state) {
+        delete bm_troy;
+    }
+};
+
+class PolyFixtureGpu : public benchmark::Fixture {
+public:
+    BM_Troy_Comparison *bm_troy;
+    troy::Ciphertext *y;
+    std::array<int64_t, N_POLY_TERMS> *coefficients;
+
+    void SetUp(::benchmark::State& state) {
         BM_Troy_Comparison bm_troy;
 
         // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
-        troy::Plaintext k;
-        bm_troy.bfv.batch_encoder.encode(std::vector<uint64_t>(bm_troy.bfv.batch_encoder.slot_count(), 42), k);
-        troy::Ciphertext y;
-        bm_troy.bfv.encryptor.encrypt_asymmetric(k, y);
+        troy::Plaintext k = bm_troy.bfv.batch_encoder.encode_new(std::vector<uint64_t>(bm_troy.bfv.batch_encoder.slot_count(), 42));
+        y = new troy::Ciphertext(bm_troy.bfv.encryptor.encrypt_asymmetric_new(k));
 
         // Precompute coefficients
-        auto *coefficients = new std::array<int64_t, N_POLY_TERMS>();
+        coefficients = new std::array<int64_t, N_POLY_TERMS>();
         gpu::calc_univ_poly_coefficients(*coefficients);
+    }
 
-        for (auto _ : state)
-            gpu::lt_univariate(bm_troy.bfv, *coefficients, bm_troy.filtered, y, bm_troy.lt);
-
+    void TearDown(::benchmark::State& state) {
+        delete bm_troy;
+        delete y;
+        delete coefficients;
     }
 };
+
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_single_threaded)(benchmark::State& state) {
+    for (auto _ : state)
+        cpu::lt_range(bm_seal->bfv, bm_seal->filtered, state.range(0), bm_seal->lt);
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_multi_threaded)(benchmark::State& state) {
+    for (auto _ : state)
+        cpu::lt_range_mt(bm_seal->bfv, bm_seal->filtered, state.range(0), bm_seal->lt);
+}
+
+BENCHMARK_DEFINE_F(PolyFixtureCpu, cpu_poly_univariate)(benchmark::State& state) {
+    for (auto _ : state)
+        cpu::lt_univariate(bm_seal->bfv, *coefficients, bm_seal->filtered, *y, bm_seal->lt);
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_single_threaded)(benchmark::State& state) {
+    for (auto _ : state)
+        gpu::lt_range(bm_troy->bfv, bm_troy->filtered, state.range(0), bm_troy->lt);
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_multi_threaded)(benchmark::State& state) {
+    for (auto _ : state)
+        gpu::lt_range_mt(bm_troy->bfv, bm_troy->filtered, state.range(0), bm_troy->lt);
+}
+
+BENCHMARK_DEFINE_F(PolyFixtureGpu, gpu_poly_univariate)(benchmark::State& state) {
+    for (auto _ : state)
+        gpu::lt_univariate(bm_troy->bfv, *coefficients, bm_troy->filtered, *y, bm_troy->lt);
+}
 
 int main(int argc, char** argv) {
 
@@ -131,21 +177,23 @@ int main(int argc, char** argv) {
         has_type = arg.find("--type") != std::string::npos;
         if(has_type) {
             if (arg == "--type=mt") {
-                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_mt)->DenseRange(10, 20, 1);
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_multi_threaded)->DenseRange(10, 20, 1);             
             } else if (arg == "--type=st") {
-                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_st)->DenseRange(10, 20, 1);
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_single_threaded)->DenseRange(10, 20, 1);           
             } else if (arg == "--type=poly") {
-                BENCHMARK(BM_SEAL_Comparison::bfv_comparison_poly);
-            } else if (arg == "--type=gpu") {
-                BENCHMARK(BM_Troy_Comparison::bfv_comparison_gpu)->DenseRange(10, 20, 1);
-            } else if (arg == "--type=poly_gpu") {
-                BENCHMARK(BM_Troy_Comparison::bfv_comparison_gpu_poly);
+                BENCHMARK_REGISTER_F(PolyFixtureCpu, cpu_poly_univariate);
+            } else if (arg == "--type=gpu_st") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 20, 1);
+            } else if (arg == "--type=gpu_mt") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_multi_threaded)->DenseRange(10, 20, 1);
+            }else if (arg == "--type=gpu_poly") {
+                BENCHMARK_REGISTER_F(PolyFixtureGpu, gpu_poly_univariate);
             }
             break;
         }
     }
     if(!has_type) {
-        BENCHMARK(BM_SEAL_Comparison::bfv_comparison_mt)->DenseRange(10, 20, 1);
+        BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_multi_threaded)->DenseRange(10, 20, 1);
     }
 
     benchmark::Initialize(&argc, argv);
