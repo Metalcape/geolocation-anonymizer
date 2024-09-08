@@ -32,7 +32,7 @@ namespace gpu {
     // Functions
     EncryptionParameters get_default_parameters() {
         EncryptionParameters parms(SchemeType::BFV);
-        size_t poly_modulus_degree = pow(2.0, POLY_MOD_DEG);
+        size_t poly_modulus_degree = pow(2.0, POLY_MOD_DEG_EXP);
 
         parms.set_poly_modulus_degree(poly_modulus_degree);
         parms.set_coeff_modulus(CoeffModulus::bfv_default(poly_modulus_degree, SecurityLevel::Classical128));

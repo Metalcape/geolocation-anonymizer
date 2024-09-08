@@ -27,7 +27,7 @@ namespace cpu {
     // Functions
     EncryptionParameters get_default_parameters() {
         EncryptionParameters parms(scheme_type::bfv);
-        size_t poly_modulus_degree = pow(2.0, POLY_MOD_DEG);
+        size_t poly_modulus_degree = pow(2.0, POLY_MOD_DEG_EXP);
 
         parms.set_poly_modulus_degree(poly_modulus_degree);
         parms.set_coeff_modulus(CoeffModulus::BFVDefault(poly_modulus_degree));

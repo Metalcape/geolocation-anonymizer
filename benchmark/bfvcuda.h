@@ -10,7 +10,7 @@
 #include <thread>
 
 #define N_MULT 20
-#define POLY_MOD_DEG 15
+#define POLY_MOD_DEG_EXP 15
 #define PLAIN_MOD 65537
 #define N_POLY_TERMS PLAIN_MOD/2+1
 

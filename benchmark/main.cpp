@@ -8,7 +8,7 @@
 #define USER_IDX 0
 
 // Generate data
-const unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG - 2);
+const unsigned int number_of_elements = (unsigned int)pow(2.0, POLY_MOD_DEG_EXP - 2);
 const auto data = generate_dataset(N_USERS, number_of_elements, 0.1);
 
 class BM_SEAL_Comparison {
