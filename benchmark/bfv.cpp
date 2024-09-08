@@ -54,6 +54,7 @@ namespace cpu {
 
         // Compute modular exponent by square and multiply
         // evaluator.exponentiate_inplace(result, P - 1, relin_keys);
+        uint64_t initial_exponent = exponent;
         while (exponent > 0)
         {
             if(exponent % 2 == 1) {
@@ -67,7 +68,7 @@ namespace cpu {
         }
 
         if(bfv.decryptor.invariant_noise_budget(result) <= 0) {
-            std::cout << "mod_exp: out of noise budget while calculating exp(X, " << exponent << ")!" << std::endl;
+            std::cout << "mod_exp: out of noise budget while calculating exp(X, " << initial_exponent << ")!" << std::endl;
             exit(-1);
         }
     }
