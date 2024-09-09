@@ -4,7 +4,7 @@
     The exponent of poly_modulus_degree as a power of 2.
     poly_modulus_degree is equal to the order of the multiplicative group defined by 
     the cyclotomic polynomial of degree m, such that phi(m) = poly_modulus_degree.
-    Higher values increase noise budget at the cost of performance.
+    Higher values increase security and noise budget at the cost of performance.
     It is also equal to the number of ciphertext slots when batching is enabled.
     For the BFV scheme, a minimum value of 2^12 is needed for keyswitching.
 */

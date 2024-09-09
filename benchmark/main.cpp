@@ -186,6 +186,8 @@ int main(int argc, char** argv) {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 20, 1);
             } else if (arg == "--type=gpu_mt") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_multi_threaded)->DenseRange(10, 20, 1);
+            } else if (arg == "--type=gpu_range") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 100, 5);
             }else if (arg == "--type=gpu_poly") {
                 BENCHMARK_REGISTER_F(PolyFixtureGpu, gpu_poly_univariate);
             }
