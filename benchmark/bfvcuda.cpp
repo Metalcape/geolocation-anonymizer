@@ -62,22 +62,23 @@ namespace gpu {
         if(!base.on_device())
             base.to_device_inplace();
 
-        uint64_t exp = exponent;
-        while (exp > 0)
+        uint64_t initial_exponent = exponent;
+        while (exponent > 0)
         {
-            if(exp % 2 == 1) {
+            if(exponent % 2 == 1) {
                 bfv.evaluator.multiply_inplace(result, base);
                 result = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
             }
-            exp >>= 1;
+            exponent >>= 1;
             bfv.evaluator.square_inplace(base);
             base = bfv.evaluator.relinearize_new(base, bfv.relin_keys);
             // std::cout << bfv.decryptor.invariant_noise_budget(base) << std::endl;
         }
 
         if(bfv.decryptor.invariant_noise_budget(result) <= 0) {
-            std::cout << "mod_exp: out of noise budget while calculating exp(X, " << exponent << ")!" << std::endl;
-            exit(-1);
+            // std::cout << "mod_exp: out of noise budget while calculating exp(X, " << exponent << ")!" << std::endl;
+            std::string err_msg("mod_exp: out of noise budget while calculating exp(X, " + std::to_string(initial_exponent) + ")!");
+            throw std::logic_error(err_msg);
         }
     }
 

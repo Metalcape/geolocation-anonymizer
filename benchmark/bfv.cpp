@@ -68,7 +68,9 @@ namespace cpu {
         }
 
         if(bfv.decryptor.invariant_noise_budget(result) <= 0) {
-            std::cout << "mod_exp: out of noise budget while calculating exp(X, " << initial_exponent << ")!" << std::endl;
+            // std::cout << "mod_exp: out of noise budget while calculating exp(X, " << initial_exponent << ")!" << std::endl;
+            std::string err_msg("mod_exp: out of noise budget while calculating exp(X, " + std::to_string(initial_exponent) + ")!");
+            throw std::logic_error(err_msg);
             exit(-1);
         }
     }
