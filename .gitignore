@@ -9,3 +9,4 @@ out.txt
 .gdb_history
 /build
 __pycache__
+/client/country_names.csv
