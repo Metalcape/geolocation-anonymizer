@@ -61,6 +61,11 @@ namespace gpu {
             result.to_device_inplace();
         if(!base.on_device())
             base.to_device_inplace();
+        
+        if (exponent == 1) {
+            result = x;
+            return;
+        }
 
         uint64_t initial_exponent = exponent;
         while (exponent > 0)
@@ -177,17 +182,73 @@ namespace gpu {
 
         delete terms;
     }
+    
+    void paterson_stockmeyer(gpu::BFVContext &bfv, const std::vector<int64_t> &coefficients, const Ciphertext &z, Ciphertext &result) {
+        int k = coefficients.size();
+        int s = static_cast<int>(std::sqrt(k));     // Truncate the result to previous integer
+        int v = k / s;
+        std::cout << "Paterson-Stockmeyer: k = " << k << ", s = " << s << ", v = " << v << std::endl;
 
-    void eval_poly_term(gpu::BFVContext &bfv, int64_t coeff, const Ciphertext &z, int i, Ciphertext &result) {
-        Ciphertext z_exp;
-        Plaintext alpha;
-        bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coeff), alpha);
+        // Precompute powers of z up to z^s.
+        // Requires only sqrt(n) exponentiations instead of n
+        // Each has a multiplicative depth of roughly log2(2i)
+        // Max depth is log2(2s) = log2(2sqrt(k)) = 1 + 0.5log2(k)
+        std::vector<Ciphertext> z_powers(s + 1);
+        std::cout << "Powers evaluation start" << std::endl;
+        for (int i = 0; i <= s; ++i) {
+            z_powers[i] = bfv.encryptor.encrypt_zero_asymmetric_new();
+            mod_exp(bfv, z, i, z_powers[i]);
+        }
+        std::cout << "Powers evaluation end" << std::endl;
+        
+        result = bfv.encryptor.encrypt_zero_asymmetric_new();
+        std::cout << "Polynomial evaluation start" << std::endl;
 
-        mod_exp(bfv, z, 2*i, z_exp);
-        z_exp.to_device_inplace();
-        alpha.to_device_inplace();
-        bfv.evaluator.multiply_plain_inplace(z_exp, alpha);
-        result = z_exp;
+        // Outer loop: combine blocks, from 0 to v - 1
+        for (int i = 0; i < v; ++i) {
+            Ciphertext block_result = bfv.encryptor.encrypt_zero_asymmetric_new();
+
+            // Inner loop: evaluate each block, from 0 to s - 1 
+            for (int j = 0; j < s; ++j) {
+                int idx = i * s + j;
+                // If the coefficient is zero, skip calculating the modular exponent
+                // Also avoids std::logic_error due to transparent ciphertext
+                if (coefficients[idx] != 0) {
+                    Plaintext alpha = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[idx]));
+                    Ciphertext term = z_powers[j];
+                    bfv.evaluator.multiply_plain_inplace(term, alpha);
+                    bfv.evaluator.relinearize_inplace(term, bfv.relin_keys);
+                    bfv.evaluator.add_inplace(block_result, term);
+                }
+            }
+
+            // Multiply by the outer power (z^(si)) and add to the result
+            Ciphertext outer_power;
+            mod_exp(bfv, z_powers[s], i, outer_power);
+            bfv.evaluator.multiply_inplace(block_result, outer_power);
+            bfv.evaluator.relinearize_inplace(block_result, bfv.relin_keys);
+            bfv.evaluator.add_inplace(result, block_result);
+        }
+
+        // Last block: remainder of k / s
+        Ciphertext last_block = bfv.encryptor.encrypt_zero_asymmetric_new();
+        for (int j = 0; j < k % s; ++j) {
+            int idx = s * v + j;
+            if (coefficients[idx] != 0) {
+                Plaintext alpha = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[idx]));
+                Ciphertext term = z_powers[j];
+                bfv.evaluator.multiply_plain_inplace(term, alpha);
+                bfv.evaluator.relinearize_inplace(term, bfv.relin_keys);
+                bfv.evaluator.add_inplace(last_block, term);
+            }
+        }
+
+        Ciphertext last_power;
+        mod_exp(bfv, z_powers[s], v, last_power);
+        bfv.evaluator.multiply_inplace(last_block, last_power);
+        bfv.evaluator.relinearize_inplace(last_block, bfv.relin_keys);
+        bfv.evaluator.add_inplace(result, last_block);
+        std::cout << "Polynomial evaluation end" << std::endl;
     }
 
     void lt_univariate(gpu::BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {
@@ -199,69 +260,19 @@ namespace gpu {
         
         bfv.evaluator.sub_inplace(z, y_copy);
 
-        // constexpr std::array<int64_t, N_POLY_TERMS> coefficients = calc_univ_poly_coefficients();
-        std::vector<Ciphertext> polynomial_terms(N_POLY_TERMS - 1);
-
-        // Keep track of threads
-        // std::vector<std::thread> threads(N_POLY_TERMS - 1);
-
-        // // Calculate sub-vector size
-        // unsigned int terms_per_thread = (N_POLY_TERMS - 1) / cpu_count;
-        // terms_per_thread = (terms_per_thread >= 1 ? terms_per_thread : 1);
-
-        // for(int i = 0; i < N_POLY_TERMS - 1; ++i) {
-        //     threads[i] = std::thread(eval_poly_term, std::ref(bfv), std::cref(z), i, std::ref(polynomial_terms[i]));
-        // }
-
-        // // Run threads
-        // std::vector<Ciphertext *> results;
-        // int start = 0;
-        // int end = terms_per_thread;
-        // while(end < N_POLY_TERMS - 1) {
-        //     Ciphertext *res = new Ciphertext();
-        //     threads.push_back(std::thread(eval_poly_terms, bfv, z, coefficients, start, end, res));
-        //     results.push_back(res);
-        //     start = end;
-        //     end += terms_per_thread;
-        // }
-        // Ciphertext *last = new Ciphertext();
-        // threads.push_back(std::thread(eval_poly_terms, bfv, z, coefficients, start, N_POLY_TERMS - 1, last));
-        // results.push_back(last);
-
-        // Join threads
-        // for(std::thread &t: threads) {
-        //     t.join();
-        // }
-
-        std::cout << "Poly eval start" << std::endl;
-
-        std::for_each(polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &term) {
-            auto i = &term - &polynomial_terms[0];
-
-            // Optimization: if the coefficient is zero, skip calculating the modular exponent
-            // Also avoids std::logic_error due to transparent ciphertext
-            if(coefficients[i] == 0) {
-                bfv.encryptor.encrypt_zero_asymmetric(term);
-            } else {
-                Plaintext alpha = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients[i]));
-                mod_exp(bfv, z, 2*i, term);
-                bfv.evaluator.multiply_plain_inplace(term, alpha);
-            }
-        });
-
-        std::cout << "Poly eval end" << std::endl;
-
-        Ciphertext second_term = bfv.encryptor.encrypt_zero_asymmetric_new();
-        std::for_each(polynomial_terms.begin(), polynomial_terms.end(), [&](Ciphertext &ctx) {
-            bfv.evaluator.add_inplace(second_term, ctx);
-        });
+        Ciphertext second_term, z2;
+        bfv.evaluator.square(z, z2);
+        bfv.evaluator.relinearize_inplace(z2, bfv.relin_keys);
+        paterson_stockmeyer(bfv, std::vector<int64_t>(coefficients.begin(), coefficients.end() - 1), z2, second_term);
         bfv.evaluator.multiply_inplace(second_term, z);
-        
+        bfv.evaluator.relinearize_inplace(second_term, bfv.relin_keys);
+
         Ciphertext first_term = bfv.encryptor.encrypt_zero_asymmetric_new();
         Plaintext alpha_zero = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients.back()));
         mod_exp(bfv, z, PLAIN_MOD - 1, first_term);
         bfv.evaluator.multiply_plain_inplace(first_term, alpha_zero);
-        result = bfv.encryptor.encrypt_zero_asymmetric_new();
-        bfv.evaluator.add(result, first_term, second_term);
+        bfv.evaluator.relinearize_inplace(first_term, bfv.relin_keys);
+
+        bfv.evaluator.add(first_term, second_term, result);
     }
 }
