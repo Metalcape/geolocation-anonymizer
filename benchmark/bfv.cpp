@@ -172,18 +172,14 @@ namespace cpu {
         // Each has a multiplicative depth of roughly log2(2i)
         // Max depth is log2(2s) = log2(2sqrt(k)) = 1 + 0.5log2(k)
         std::vector<Ciphertext> z_powers(s + 1);
-        std::cout << "Powers evaluation start" << std::endl;
         std::for_each(std::execution::par, z_powers.begin(), z_powers.end(), [&](Ciphertext &z_i) {
             auto i = &z_i - &z_powers[0];
             bfv.encryptor.encrypt_zero(z_powers[i]);
             mod_exp(bfv, z, i, z_powers[i]);
         });
-        std::cout << "Powers evaluation end" << std::endl;
-        
+
         bfv.encryptor.encrypt_zero(result);
         std::vector<Ciphertext> block_results(v);
-
-        std::cout << "Polynomial evaluation start" << std::endl;
 
         // In parallel: combine blocks, from 0 to v - 1
         std::for_each(std::execution::par, block_results.begin(), block_results.end(), [&](Ciphertext &block_result) {
@@ -232,8 +228,6 @@ namespace cpu {
         bfv.evaluator.multiply_inplace(last_block, last_power);
         bfv.evaluator.relinearize_inplace(last_block, bfv.relin_keys);
         bfv.evaluator.add_inplace(result, last_block);
-
-        std::cout << "Polynomial evaluation end" << std::endl;
     }
 
     void lt_univariate(cpu::BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {

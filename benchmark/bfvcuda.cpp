@@ -182,7 +182,7 @@ namespace gpu {
 
         delete terms;
     }
-    
+
     void paterson_stockmeyer(gpu::BFVContext &bfv, const std::vector<int64_t> &coefficients, const Ciphertext &z, Ciphertext &result) {
         int k = coefficients.size();
         int s = static_cast<int>(std::sqrt(k));     // Truncate the result to previous integer
@@ -194,15 +194,12 @@ namespace gpu {
         // Each has a multiplicative depth of roughly log2(2i)
         // Max depth is log2(2s) = log2(2sqrt(k)) = 1 + 0.5log2(k)
         std::vector<Ciphertext> z_powers(s + 1);
-        std::cout << "Powers evaluation start" << std::endl;
         for (int i = 0; i <= s; ++i) {
             z_powers[i] = bfv.encryptor.encrypt_zero_asymmetric_new();
             mod_exp(bfv, z, i, z_powers[i]);
         }
-        std::cout << "Powers evaluation end" << std::endl;
         
         result = bfv.encryptor.encrypt_zero_asymmetric_new();
-        std::cout << "Polynomial evaluation start" << std::endl;
 
         // Outer loop: combine blocks, from 0 to v - 1
         for (int i = 0; i < v; ++i) {
@@ -248,7 +245,6 @@ namespace gpu {
         bfv.evaluator.multiply_inplace(last_block, last_power);
         bfv.evaluator.relinearize_inplace(last_block, bfv.relin_keys);
         bfv.evaluator.add_inplace(result, last_block);
-        std::cout << "Polynomial evaluation end" << std::endl;
     }
 
     void lt_univariate(gpu::BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const Ciphertext &x, const Ciphertext &y, Ciphertext &result) {
@@ -260,13 +256,16 @@ namespace gpu {
         
         bfv.evaluator.sub_inplace(z, y_copy);
 
+        // Evaluate the second term as Zg(Z^2)
         Ciphertext second_term, z2;
         bfv.evaluator.square(z, z2);
         bfv.evaluator.relinearize_inplace(z2, bfv.relin_keys);
+        // Evaluate g(X) with X = Z^2 using the Paterson-Stockmeyer algorithm
         paterson_stockmeyer(bfv, std::vector<int64_t>(coefficients.begin(), coefficients.end() - 1), z2, second_term);
         bfv.evaluator.multiply_inplace(second_term, z);
         bfv.evaluator.relinearize_inplace(second_term, bfv.relin_keys);
 
+        // Evaluate the first term
         Ciphertext first_term = bfv.encryptor.encrypt_zero_asymmetric_new();
         Plaintext alpha_zero = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), coefficients.back()));
         mod_exp(bfv, z, PLAIN_MOD - 1, first_term);
