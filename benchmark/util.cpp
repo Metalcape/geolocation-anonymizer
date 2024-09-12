@@ -1,8 +1,6 @@
 #include "bfv.h"
 #include "bfvcuda.h"
 
-const unsigned int cpu_count = std::thread::hardware_concurrency();
-
 std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned int cols, double chance) {
     if (chance < 0.0 || chance > 1.0) {
         throw std::invalid_argument("chance must be between 0.0 and 1.0");
@@ -10,12 +8,6 @@ std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned 
 
     std::random_device rd;
     std::vector<std::vector<uint64_t>> matrix(rows, std::vector<uint64_t>(cols, 0));
-
-    // for (int i = 0; i < rows; ++i) {
-    //     for (int j = 0; j < cols; ++j) {
-    //         matrix[i][j] = d(gen);
-    //     }
-    // }
 
     std::for_each(std::execution::par, matrix.begin(), matrix.end(), [&](std::vector<uint64_t> &row) {
         std::mt19937 gen(rd());
@@ -46,41 +38,89 @@ std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows) {
         }
     });
 
-    // Print test data
-    // std::cout <<  "Test data sample: " << std::endl;
-    // std::cout <<  "[ ";
-    // for (int i = 0; i < matrix[0].size() - 1; ++i) {
-    //     std::cout <<  matrix[0][i] << ", ";
-    // }
-    // std::cout << matrix[0].back() << "] " << std::endl;
-
     return matrix;
 }
 
-void print_plaintext(cpu::BFVContext &bfv, const seal::Plaintext &ptx, size_t n) {
-    std::vector<uint64_t> decoded_ptx;
-    bfv.batch_encoder.decode(ptx, decoded_ptx);
-    for(int i = 0; i < n; ++i)
-        std::cout << decoded_ptx[i] << ' ';
-    std::cout << std::endl;
+void print_vector(std::vector<uint64_t> v) {
+    std::cout <<  "[ ";
+    for (int i = 0; i < v.size() - 1; ++i) {
+        std::cout <<  v[i] << ", ";
+    }
+    std::cout << v.back() << "] " << std::endl;
 }
 
-void print_ciphertext(cpu::BFVContext &bfv, const seal::Ciphertext &ctx, size_t n) {
-    seal::Plaintext ptx;
-    bfv.decryptor.decrypt(ctx, ptx);
-    print_plaintext(bfv, ptx, n);
+void print_vector(std::vector<uint64_t> v, size_t limit) {
+    std::cout <<  "[ ";
+    for (int i = 0; i < v.size() - 1 && i < limit; ++i) {
+        std::cout <<  v[i] << ", ";
+    }
+    std::cout << v.back() << "] " << std::endl;
 }
 
-void print_plaintext(gpu::BFVContext &bfv, const troy::Plaintext &ptx, size_t n) {
-    std::vector<uint64_t> decoded_ptx;
-    bfv.batch_encoder.decode(ptx, decoded_ptx);
-    for(int i = 0; i < n; ++i)
-        std::cout << decoded_ptx[i] << ' ';
-    std::cout << std::endl;
+namespace cpu {
+    void print_plaintext(cpu::BFVContext &bfv, const seal::Plaintext &ptx) {
+        std::vector<uint64_t> decoded_ptx;
+        bfv.batch_encoder.decode(ptx, decoded_ptx);
+        print_vector(decoded_ptx);
+    }
+
+    void print_ciphertext(cpu::BFVContext &bfv, const seal::Ciphertext &ctx) {
+        seal::Plaintext ptx;
+        bfv.decryptor.decrypt(ctx, ptx);
+        print_plaintext(bfv, ptx);
+    }
+
+    void print_plaintext(cpu::BFVContext &bfv, const seal::Plaintext &ptx, size_t limit) {
+        std::vector<uint64_t> decoded_ptx;
+        bfv.batch_encoder.decode(ptx, decoded_ptx);
+        print_vector(decoded_ptx, limit);
+    }
+
+    void print_ciphertext(cpu::BFVContext &bfv, const seal::Ciphertext &ctx, size_t limit) {
+        seal::Plaintext ptx;
+        bfv.decryptor.decrypt(ctx, ptx);
+        print_plaintext(bfv, ptx, limit);
+    }
 }
 
-void print_ciphertext(gpu::BFVContext &bfv, const troy::Ciphertext &ctx, size_t n) {
-    troy::Plaintext ptx;
-    bfv.decryptor.decrypt(ctx, ptx);
-    print_plaintext(bfv, ptx, n);
+namespace gpu {
+    void print_plaintext(gpu::BFVContext &bfv, const troy::Plaintext &ptx) {
+        std::vector<uint64_t> decoded_ptx;
+        bfv.batch_encoder.decode(ptx, decoded_ptx);
+        print_vector(decoded_ptx);
+    }
+
+    void print_ciphertext(gpu::BFVContext &bfv, const troy::Ciphertext &ctx) {
+        troy::Plaintext ptx;
+        troy::Ciphertext ctx_d = ctx;
+        if(!ctx_d.on_device())
+            ctx_d.to_device_inplace();
+        bfv.decryptor.decrypt(ctx_d, ptx);
+        print_plaintext(bfv, ptx);
+    }
+
+    void print_plaintext(gpu::BFVContext &bfv, const troy::Plaintext &ptx, size_t limit) {
+        std::vector<uint64_t> decoded_ptx;
+        bfv.batch_encoder.decode(ptx, decoded_ptx);
+        print_vector(decoded_ptx, limit);
+    }
+
+    void print_ciphertext(gpu::BFVContext &bfv, const troy::Ciphertext &ctx, size_t limit) {
+        troy::Plaintext ptx;
+        troy::Ciphertext ctx_d = ctx;
+        if(!ctx_d.on_device())
+            ctx_d.to_device_inplace();
+        bfv.decryptor.decrypt(ctx_d, ptx);
+        print_plaintext(bfv, ptx, limit);
+    }
 }
+
+int64_t interpret_as_signed_mod_p(uint64_t x, uint64_t p) {   
+    if (x < (p - 1)/2)
+        // x is positive
+        return static_cast<int64_t>(x);
+    else
+        // Shift x into the negative range
+        return static_cast<int64_t>(x) - static_cast<int64_t>(p - 1);
+}
+    
