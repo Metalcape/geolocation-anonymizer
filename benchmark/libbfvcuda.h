@@ -20,4 +20,5 @@ namespace gpu {
     void print_ciphertext(BFVContext &bfv, const troy::Ciphertext &ctx, size_t n);
 }
 
-std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned int cols, double density);
+std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows, unsigned int cols, double chance);
+std::vector<std::vector<uint64_t>> generate_dataset(unsigned int rows);
