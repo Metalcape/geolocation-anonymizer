@@ -167,6 +167,58 @@ BENCHMARK_DEFINE_F(PolyFixtureGpu, gpu_poly_univariate)(benchmark::State& state)
     delete bfv;
 }
 
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_encryption)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new cpu::BFVContext(cpu::get_default_parameters());
+    seal::Plaintext ptx;
+    seal::Ciphertext ctx;
+
+    for (auto _ : state) {
+        bfv->batch_encoder.encode(data[0], ptx);
+        bfv->encryptor.encrypt(ptx, ctx);
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_decryption)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new cpu::BFVContext(cpu::get_default_parameters());
+    enc_data = cpu::encrypt_data(*bfv, data);
+    seal::Plaintext ptx;
+    seal::Ciphertext ctx;
+    std::vector<uint64_t> out;
+
+    for (auto _ : state) {
+        bfv->decryptor.decrypt(enc_data[0], ptx);
+        bfv->batch_encoder.decode(ptx, out);
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_encryption)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new gpu::BFVContext(gpu::get_default_parameters());
+    troy::Plaintext ptx;
+    troy::Ciphertext ctx;
+
+    for (auto _ : state) {
+        ptx = bfv->batch_encoder.encode_new(data[0]);
+        ctx = bfv->encryptor.encrypt_asymmetric_new(ptx.to_device());
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_decryption)(benchmark::State& state) {
+    data = generate_dataset(1);  
+    bfv = new gpu::BFVContext(gpu::get_default_parameters());
+    enc_data = gpu::encrypt_data(*bfv, data);
+    troy::Plaintext ptx;
+    troy::Ciphertext ctx;
+    std::vector<uint64_t> out;
+
+    for (auto _ : state) {
+        ptx = bfv->decryptor.decrypt_new(enc_data[0].to_device());
+        out = bfv->batch_encoder.decode_new(ptx);
+    }
+}
+
 void test_equivalence() {
     std::cout << "Setting up..." << std::endl;
     gpu::BFVContext bfv(gpu::get_default_parameters());
@@ -186,7 +238,6 @@ void test_equivalence() {
     troy::Ciphertext result = bfv.evaluator.multiply_new(user_data, aggregate);
     filtered = bfv.evaluator.relinearize_new(result, bfv.relin_keys);
     
-    std::cout << "Data samples:" << std::endl;
     std::cout << "User vector:" << std::endl;
     gpu::print_ciphertext(bfv, enc_data[USER_IDX], limit);
     std::cout << "Aggregated vector:" << std::endl;
@@ -267,10 +318,18 @@ int main(int argc, char** argv) {
             } else if (arg == "--type=gpu") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 20, 1);
             } else if (arg == "--type=gpu_range") {
-                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 80, 5);
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 100, 5);
             } else if (arg == "--type=gpu_poly") {
                 BENCHMARK_REGISTER_F(PolyFixtureGpu, gpu_poly_univariate);
-            } else if (arg == "--type=test") {
+            } else if (arg == "--type=cpu_enc") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_encryption);
+            } else if (arg == "--type=cpu_dec") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_decryption);
+            } else if (arg == "--type=gpu_enc") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_encryption);
+            } else if (arg == "--type=gpu_dec") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_decryption);
+            } else if (arg == "--type=test_eq") {
                 test_equivalence();
             }
             break;
