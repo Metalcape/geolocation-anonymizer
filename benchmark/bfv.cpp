@@ -99,16 +99,19 @@ namespace cpu {
         // Range comparison from 0 to threshold - 1
 
         // Equals [i][j] == 1 if x[j] == i, 0 otherwise
-        std::vector<Ciphertext> equals(y);
+        // Sum over i: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
+        // std::vector<Ciphertext> equals(y);
+        bfv.encryptor.encrypt_zero(result);
 
         for(uint64_t i = 0; i < y; ++i) {
             Plaintext ptx(std::to_string(i));
-            equate_plain(bfv, x, ptx, equals[i]);
-            // print_ciphertext(he, equals[i], 14);
+            Ciphertext equals;
+            equate_plain(bfv, x, ptx, equals);
+            // Sum every intermediate result immediately to avoid memory growth
+            bfv.evaluator.add_inplace(result, equals);
         }
 
-        // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
-        bfv.evaluator.add_many(equals, result);
+        // bfv.evaluator.add_many(equals, result);
     }
 
     void lt_range_mt(cpu::BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &result) {

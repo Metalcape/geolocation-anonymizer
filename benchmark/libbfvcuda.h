@@ -7,7 +7,6 @@ namespace gpu {
     void mod_exp(BFVContext &bfv, const troy::Ciphertext &x, uint64_t exponent, troy::Ciphertext &result);
     void equate_plain(BFVContext &bfv, const troy::Ciphertext &x, const troy::Plaintext &y, troy::Ciphertext &result);
     void lt_range(BFVContext &bfv, const troy::Ciphertext &x, uint64_t y, troy::Ciphertext &result);
-    void lt_range_mt(BFVContext &bfv, const troy::Ciphertext &x, uint64_t y, troy::Ciphertext &result);
     void calc_univ_poly_coefficients(std::array<int64_t, N_POLY_TERMS> &result);
     void lt_univariate(BFVContext &bfv, const std::array<int64_t, N_POLY_TERMS> &coefficients, const troy::Ciphertext &x, const troy::Ciphertext &y, troy::Ciphertext &result);
 

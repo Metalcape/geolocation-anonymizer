@@ -113,40 +113,23 @@ namespace gpu {
         // Range comparison from 0 to threshold - 1
 
         // Equals [i][j] == 1 if x[j] == i, 0 otherwise
-        std::vector<Ciphertext> equals(y);
+        // Sum over i: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
+        // std::vector<Ciphertext> equals(y);
+        bfv.encryptor.encrypt_zero_asymmetric(result);
 
         for(uint64_t i = 0; i < y; ++i) {
             Plaintext ptx = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i));
-            equate_plain(bfv, x, ptx, equals[i]);
-            // print_ciphertext(he, equals[i], 14);
+            Ciphertext equals;
+            equate_plain(bfv, x, ptx, equals);
+            // Sum every intermediate result immediately to avoid memory growth
+            bfv.evaluator.add_inplace(result, equals);
         }
 
-        // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
-        bfv.encryptor.encrypt_zero_asymmetric(result);
-        std::for_each(equals.begin(), equals.end(), [&](Ciphertext &ctx) {
-            ctx.to_device_inplace();
-            bfv.evaluator.add_inplace(result, ctx);
-        });
-    }
-
-    void lt_range_mt(gpu::BFVContext &bfv, const Ciphertext &x, uint64_t y, Ciphertext &result) {
-        // Vector to store results
-        std::vector<Ciphertext> equals(y);
-
-        // Loop with concurrent execution
-        std::for_each(std::execution::par, equals.begin(), equals.end(), [&](Ciphertext &row) {
-            // auto i = std::find(equals.begin(), equals.end(), row) - equals.begin();
-            auto i = &row - &equals[0];
-            Plaintext ptx = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i));
-            equate_plain(bfv, x, ptx, row);
-        });
-
-        // Sum everything: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
-        bfv.encryptor.encrypt_zero_asymmetric(result);
-        std::for_each(equals.begin(), equals.end(), [&](Ciphertext &ctx) {
-            ctx.to_device_inplace();
-            bfv.evaluator.add_inplace(result, ctx);
-        });
+        // bfv.encryptor.encrypt_zero_asymmetric(result);
+        // std::for_each(equals.begin(), equals.end(), [&](Ciphertext &ctx) {
+        //     ctx.to_device_inplace();
+        //     bfv.evaluator.add_inplace(result, ctx);
+        // });
     }
 
     constexpr int64_t mod_exp(int64_t base, int64_t exponent, int64_t p) {
