@@ -1,6 +1,6 @@
 {
   "context": {
-    "date": "2024-09-04T15:33:02+02:00",
+    "date": "2024-09-14T07:10:54+02:00",
     "host_name": "Hagane",
     "executable": "./main.out",
     "num_cpus": 24,
@@ -32,7 +32,7 @@
         "num_sharing": 24
       }
     ],
-    "load_avg": [0.012207,0.0166016,0.0302734],
+    "load_avg": [1,1,1],
     "library_version": "v1.8.5-10-gef73a300",
     "library_build_type": "release",
     "json_schema_version": 1
@@ -48,9 +48,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1569986599999538e+04,
-      "cpu_time": 1.1480339800000000e+04,
-      "time_unit": "ms"
+      "real_time": 1.0712640865000139e+01,
+      "cpu_time": 1.0667309400000001e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -62,9 +62,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0604038312998455e+04,
-      "cpu_time": 1.0363273400000000e+04,
-      "time_unit": "ms"
+      "real_time": 1.0883484623998811e+01,
+      "cpu_time": 1.0640393699999997e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -76,9 +76,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0314522939999733e+04,
-      "cpu_time": 1.0182243700000001e+04,
-      "time_unit": "ms"
+      "real_time": 1.0865852074999566e+01,
+      "cpu_time": 1.0532584400000005e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -90,9 +90,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0227532509001321e+04,
-      "cpu_time": 1.0226773000000001e+04,
-      "time_unit": "ms"
+      "real_time": 1.1147546511001565e+01,
+      "cpu_time": 1.0808931900000005e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -104,9 +104,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0042133238999668e+04,
-      "cpu_time": 9.9764300000000076e+03,
-      "time_unit": "ms"
+      "real_time": 1.0775371343999723e+01,
+      "cpu_time": 1.0468667099999990e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -118,9 +118,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0208025388001261e+04,
-      "cpu_time": 1.0208025699999993e+04,
-      "time_unit": "ms"
+      "real_time": 1.0677980054999352e+01,
+      "cpu_time": 1.0412452999999999e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -132,9 +132,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0131411189999199e+04,
-      "cpu_time": 1.0099851999999999e+04,
-      "time_unit": "ms"
+      "real_time": 1.0822345297001448e+01,
+      "cpu_time": 1.0503117099999997e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -146,9 +146,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0078153184000257e+04,
-      "cpu_time": 9.9998973000000005e+03,
-      "time_unit": "ms"
+      "real_time": 1.0848796261998359e+01,
+      "cpu_time": 1.0845536300000006e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -160,9 +160,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0178749598999275e+04,
-      "cpu_time": 1.0167670400000006e+04,
-      "time_unit": "ms"
+      "real_time": 1.0828956452998682e+01,
+      "cpu_time": 1.0596323600000005e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -174,9 +174,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0119625336999889e+04,
-      "cpu_time": 1.0119627600000002e+04,
-      "time_unit": "ms"
+      "real_time": 1.0811483925997891e+01,
+      "cpu_time": 1.0586261899999982e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -188,9 +188,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0110627055000805e+04,
-      "cpu_time": 1.0100378699999994e+04,
-      "time_unit": "ms"
+      "real_time": 1.0780224065998482e+01,
+      "cpu_time": 1.0581512799999985e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -202,9 +202,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0226164702999085e+04,
-      "cpu_time": 1.0023334700000021e+04,
-      "time_unit": "ms"
+      "real_time": 1.0922073980000278e+01,
+      "cpu_time": 1.0686138999999997e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -216,9 +216,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0501174340999569e+04,
-      "cpu_time": 1.0412840399999994e+04,
-      "time_unit": "ms"
+      "real_time": 1.0835885634001897e+01,
+      "cpu_time": 1.0831335300000006e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -230,9 +230,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0070640472000377e+04,
-      "cpu_time": 9.9870879000000059e+03,
-      "time_unit": "ms"
+      "real_time": 1.0925161323000793e+01,
+      "cpu_time": 1.0925161500000002e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -244,9 +244,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0271442307999678e+04,
-      "cpu_time": 1.0267680099999978e+04,
-      "time_unit": "ms"
+      "real_time": 1.0835914256000251e+01,
+      "cpu_time": 1.0569584200000008e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -258,9 +258,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0158015480999893e+04,
-      "cpu_time": 1.0042752600000000e+04,
-      "time_unit": "ms"
+      "real_time": 1.0829914591999113e+01,
+      "cpu_time": 1.0462552899999991e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -272,9 +272,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0304803708000691e+04,
-      "cpu_time": 1.0064877800000006e+04,
-      "time_unit": "ms"
+      "real_time": 1.1004834530998778e+01,
+      "cpu_time": 1.0758317999999974e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -286,9 +286,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0241926209997473e+04,
-      "cpu_time": 1.0159054900000001e+04,
-      "time_unit": "ms"
+      "real_time": 1.0888539114999730e+01,
+      "cpu_time": 1.0447843299999988e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -300,9 +300,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0151903882000624e+04,
-      "cpu_time": 1.0025618100000031e+04,
-      "time_unit": "ms"
+      "real_time": 1.0860398120999889e+01,
+      "cpu_time": 1.0369940300000053e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10",
@@ -314,9 +314,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0130820504000440e+04,
-      "cpu_time": 1.0015920100000018e+04,
-      "time_unit": "ms"
+      "real_time": 1.0858763246000308e+01,
+      "cpu_time": 1.0772883500000034e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10_mean",
@@ -329,9 +329,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.0282084848149863e+04,
-      "cpu_time": 1.0196183910000003e+04,
-      "time_unit": "ms"
+      "real_time": 1.0855808313799754e+01,
+      "cpu_time": 1.0623342460000002e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10_median",
@@ -344,9 +344,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.0193387493500268e+04,
-      "cpu_time": 1.0110003149999997e+04,
-      "time_unit": "ms"
+      "real_time": 1.0842355258999305e+01,
+      "cpu_time": 1.0591292749999994e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10_stddev",
@@ -359,9 +359,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 3.3352138342658748e+02,
-      "cpu_time": 3.2602845918394314e+02,
-      "time_unit": "ms"
+      "real_time": 9.9501284424183781e-02,
+      "cpu_time": 1.5954177845484080e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/10_cv",
@@ -374,9 +374,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 3.2437135887533608e-02,
-      "cpu_time": 3.1975537324722796e-02,
-      "time_unit": "ms"
+      "real_time": 9.1657186225091239e-03,
+      "cpu_time": 1.5018039666476192e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -388,9 +388,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0799261649000982e+04,
-      "cpu_time": 1.0723338099999979e+04,
-      "time_unit": "ms"
+      "real_time": 1.0967290911998134e+01,
+      "cpu_time": 1.0967238599999973e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -402,9 +402,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0513938812000561e+04,
-      "cpu_time": 1.0248279599999989e+04,
-      "time_unit": "ms"
+      "real_time": 1.1146599129999231e+01,
+      "cpu_time": 1.0991942700000038e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -416,9 +416,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0453781357999105e+04,
-      "cpu_time": 1.0405984899999965e+04,
-      "time_unit": "ms"
+      "real_time": 1.1280107619000773e+01,
+      "cpu_time": 1.1081589900000040e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -430,9 +430,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0854998734001128e+04,
-      "cpu_time": 1.0777664599999980e+04,
-      "time_unit": "ms"
+      "real_time": 1.1302721337000548e+01,
+      "cpu_time": 1.1114095899999995e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -444,9 +444,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0966507435998210e+04,
-      "cpu_time": 1.0735040200000014e+04,
-      "time_unit": "ms"
+      "real_time": 1.1338202426999487e+01,
+      "cpu_time": 1.1338001399999996e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -458,9 +458,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0817393137000181e+04,
-      "cpu_time": 1.0435596499999974e+04,
-      "time_unit": "ms"
+      "real_time": 1.1428808755001228e+01,
+      "cpu_time": 1.1371601699999985e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -472,9 +472,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0483318861999578e+04,
-      "cpu_time": 1.0470041499999979e+04,
-      "time_unit": "ms"
+      "real_time": 1.1672337265998067e+01,
+      "cpu_time": 1.1405380600000001e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -486,9 +486,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0752746408998064e+04,
-      "cpu_time": 1.0468607399999997e+04,
-      "time_unit": "ms"
+      "real_time": 1.1322006776998023e+01,
+      "cpu_time": 1.1102754099999970e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -500,9 +500,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0510010235000664e+04,
-      "cpu_time": 1.0377211999999985e+04,
-      "time_unit": "ms"
+      "real_time": 1.1331843789001141e+01,
+      "cpu_time": 1.1129539999999963e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -514,9 +514,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0592960840996966e+04,
-      "cpu_time": 1.0208782699999972e+04,
-      "time_unit": "ms"
+      "real_time": 1.1482199325000693e+01,
+      "cpu_time": 1.1234835099999998e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -528,9 +528,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0669521571002406e+04,
-      "cpu_time": 1.0585495600000002e+04,
-      "time_unit": "ms"
+      "real_time": 1.1432194693999918e+01,
+      "cpu_time": 1.0860670200000015e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -542,9 +542,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0386842436000734e+04,
-      "cpu_time": 1.0236846400000048e+04,
-      "time_unit": "ms"
+      "real_time": 1.1108393377999164e+01,
+      "cpu_time": 1.0715558999999985e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -556,9 +556,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0525697351000417e+04,
-      "cpu_time": 1.0354691000000003e+04,
-      "time_unit": "ms"
+      "real_time": 1.1338455018001696e+01,
+      "cpu_time": 1.0947083199999952e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -570,9 +570,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0633926965001592e+04,
-      "cpu_time": 1.0447193799999979e+04,
-      "time_unit": "ms"
+      "real_time": 1.1139104452999163e+01,
+      "cpu_time": 1.0992485399999964e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -584,9 +584,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0627826898002240e+04,
-      "cpu_time": 1.0412663500000008e+04,
-      "time_unit": "ms"
+      "real_time": 1.1181478588998289e+01,
+      "cpu_time": 1.0738350800000035e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -598,9 +598,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0443609214002208e+04,
-      "cpu_time": 1.0328784199999973e+04,
-      "time_unit": "ms"
+      "real_time": 1.1515028218000225e+01,
+      "cpu_time": 1.1020030399999996e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -612,9 +612,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0539684872997896e+04,
-      "cpu_time": 1.0403364000000010e+04,
-      "time_unit": "ms"
+      "real_time": 1.1032041864000348e+01,
+      "cpu_time": 1.0893843800000013e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -626,9 +626,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0561478814997827e+04,
-      "cpu_time": 1.0403225199999952e+04,
-      "time_unit": "ms"
+      "real_time": 1.1344093830997735e+01,
+      "cpu_time": 1.1167762599999946e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -640,9 +640,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0465762097999686e+04,
-      "cpu_time": 1.0376209099999982e+04,
-      "time_unit": "ms"
+      "real_time": 1.1635868572997424e+01,
+      "cpu_time": 1.1302796000000058e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11",
@@ -654,9 +654,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0557154819001880e+04,
-      "cpu_time": 1.0323637599999984e+04,
-      "time_unit": "ms"
+      "real_time": 1.1355729286002315e+01,
+      "cpu_time": 1.1304853800000046e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11_mean",
@@ -669,9 +669,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.0607821125650118e+04,
-      "cpu_time": 1.0436132894999990e+04,
-      "time_unit": "ms"
+      "real_time": 1.1317725262049681e+01,
+      "cpu_time": 1.1084020760000000e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11_median",
@@ -684,9 +684,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.0559316816999853e+04,
-      "cpu_time": 1.0404674449999988e+04,
-      "time_unit": "ms"
+      "real_time": 1.1335023108000314e+01,
+      "cpu_time": 1.1092172000000005e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11_stddev",
@@ -699,9 +699,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.5662976271646309e+02,
-      "cpu_time": 1.5915819785703698e+02,
-      "time_unit": "ms"
+      "real_time": 1.8513524185590022e-01,
+      "cpu_time": 2.0194427762569642e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/11_cv",
@@ -714,9 +714,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 1.4765498103821372e-02,
-      "cpu_time": 1.5250687151875057e-02,
-      "time_unit": "ms"
+      "real_time": 1.6357990459150935e-02,
+      "cpu_time": 1.8219406296537507e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -728,9 +728,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1244983213000523e+04,
-      "cpu_time": 1.0909554599999978e+04,
-      "time_unit": "ms"
+      "real_time": 1.1867354248999618e+01,
+      "cpu_time": 1.1454415799999992e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -742,9 +742,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1225163216000510e+04,
-      "cpu_time": 1.0807607500000016e+04,
-      "time_unit": "ms"
+      "real_time": 1.1848437390002800e+01,
+      "cpu_time": 1.1724620500000015e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -756,9 +756,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1218078294001316e+04,
-      "cpu_time": 1.1024625799999967e+04,
-      "time_unit": "ms"
+      "real_time": 1.1466336190002039e+01,
+      "cpu_time": 1.0804535500000043e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -770,9 +770,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1091582641998684e+04,
-      "cpu_time": 1.0963148600000068e+04,
-      "time_unit": "ms"
+      "real_time": 1.1685125242998765e+01,
+      "cpu_time": 1.1425018899999941e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -784,9 +784,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1277696372999344e+04,
-      "cpu_time": 1.1273181799999975e+04,
-      "time_unit": "ms"
+      "real_time": 1.1743992652998713e+01,
+      "cpu_time": 1.1656816000000049e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -798,9 +798,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1667420609999681e+04,
-      "cpu_time": 1.1012974600000007e+04,
-      "time_unit": "ms"
+      "real_time": 1.2162422094999783e+01,
+      "cpu_time": 1.1574130300000093e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -812,9 +812,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1310800646999269e+04,
-      "cpu_time": 1.0931294699999966e+04,
-      "time_unit": "ms"
+      "real_time": 1.2076178047998837e+01,
+      "cpu_time": 1.2053490600000032e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -826,9 +826,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1621931967998535e+04,
-      "cpu_time": 1.1158692400000064e+04,
-      "time_unit": "ms"
+      "real_time": 1.2067848129001504e+01,
+      "cpu_time": 1.1918573399999900e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -840,9 +840,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1372515180999471e+04,
-      "cpu_time": 1.1097875999999927e+04,
-      "time_unit": "ms"
+      "real_time": 1.2016627575001621e+01,
+      "cpu_time": 1.1653918099999942e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -854,9 +854,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0885023721002653e+04,
-      "cpu_time": 1.0621637899999996e+04,
-      "time_unit": "ms"
+      "real_time": 1.2068693933000759e+01,
+      "cpu_time": 1.1597386400000005e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -868,9 +868,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1108196086999669e+04,
-      "cpu_time": 1.1032570200000009e+04,
-      "time_unit": "ms"
+      "real_time": 1.2005415835999884e+01,
+      "cpu_time": 1.2005373599999984e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -882,9 +882,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1057933906002290e+04,
-      "cpu_time": 1.0762203700000100e+04,
-      "time_unit": "ms"
+      "real_time": 1.1880390558999352e+01,
+      "cpu_time": 1.1497700300000020e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -896,9 +896,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1284458439997252e+04,
-      "cpu_time": 1.1145054499999900e+04,
-      "time_unit": "ms"
+      "real_time": 1.1902787520000857e+01,
+      "cpu_time": 1.1679823599999963e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -910,9 +910,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1436353965997114e+04,
-      "cpu_time": 1.1320840900000007e+04,
-      "time_unit": "ms"
+      "real_time": 1.1778119982998760e+01,
+      "cpu_time": 1.1642866000000026e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -924,9 +924,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1172027393000462e+04,
-      "cpu_time": 1.0740891400000010e+04,
-      "time_unit": "ms"
+      "real_time": 1.1444566316997225e+01,
+      "cpu_time": 1.1225702500000011e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -938,9 +938,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0976460133002547e+04,
-      "cpu_time": 1.0791301300000101e+04,
-      "time_unit": "ms"
+      "real_time": 1.1936561872000311e+01,
+      "cpu_time": 1.1778703999999948e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -952,9 +952,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.0755010455999582e+04,
-      "cpu_time": 1.0627053299999943e+04,
-      "time_unit": "ms"
+      "real_time": 1.1608214064999629e+01,
+      "cpu_time": 1.1426600999999891e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -966,9 +966,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1101134830001683e+04,
-      "cpu_time": 1.0854002100000002e+04,
-      "time_unit": "ms"
+      "real_time": 1.2028842744999565e+01,
+      "cpu_time": 1.1687215400000014e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -980,9 +980,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1785111662997224e+04,
-      "cpu_time": 1.1785113900000055e+04,
-      "time_unit": "ms"
+      "real_time": 1.1982255148002878e+01,
+      "cpu_time": 1.1754425900000001e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12",
@@ -994,9 +994,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1488924958001007e+04,
-      "cpu_time": 1.1325935699999945e+04,
-      "time_unit": "ms"
+      "real_time": 1.2023690261001320e+01,
+      "cpu_time": 1.1432013099999949e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12_mean",
@@ -1009,9 +1009,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.1254040384849943e+04,
-      "cpu_time": 1.1009278045000003e+04,
-      "time_unit": "ms"
+      "real_time": 1.1879692990550211e+01,
+      "cpu_time": 1.1599666544999991e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12_median",
@@ -1024,9 +1024,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.1235073214500517e+04,
-      "cpu_time": 1.0988061600000037e+04,
-      "time_unit": "ms"
+      "real_time": 1.1919674696000584e+01,
+      "cpu_time": 1.1648392049999984e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12_stddev",
@@ -1039,9 +1039,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 2.5915929165915657e+02,
-      "cpu_time": 2.7892637470847501e+02,
-      "time_unit": "ms"
+      "real_time": 2.0301778771033702e-01,
+      "cpu_time": 2.7709353422323058e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/12_cv",
@@ -1054,9 +1054,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 2.3028111042504681e-02,
-      "cpu_time": 2.5335573646916184e-02,
-      "time_unit": "ms"
+      "real_time": 1.7089481005260743e-02,
+      "cpu_time": 2.3888060328998949e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1068,9 +1068,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2110354379998171e+04,
-      "cpu_time": 1.1328187299999969e+04,
-      "time_unit": "ms"
+      "real_time": 1.2356219227000111e+01,
+      "cpu_time": 1.2356205300000056e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1082,9 +1082,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1790253390001453e+04,
-      "cpu_time": 1.1760070299999938e+04,
-      "time_unit": "ms"
+      "real_time": 1.2416559580997273e+01,
+      "cpu_time": 1.2130198000000064e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1096,9 +1096,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1849532780001027e+04,
-      "cpu_time": 1.1849532999999952e+04,
-      "time_unit": "ms"
+      "real_time": 1.2338564654997754e+01,
+      "cpu_time": 1.1934849499999928e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1110,9 +1110,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1914867755000159e+04,
-      "cpu_time": 1.1686399299999948e+04,
-      "time_unit": "ms"
+      "real_time": 1.2154887536999013e+01,
+      "cpu_time": 1.1989109399999961e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1124,9 +1124,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1520466973997827e+04,
-      "cpu_time": 1.1467110400000023e+04,
-      "time_unit": "ms"
+      "real_time": 1.2261247041002207e+01,
+      "cpu_time": 1.1927863299999899e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1138,9 +1138,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2161020011997607e+04,
-      "cpu_time": 1.1973913000000039e+04,
-      "time_unit": "ms"
+      "real_time": 1.2106770225000218e+01,
+      "cpu_time": 1.2044141599999875e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1152,9 +1152,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2217367985998862e+04,
-      "cpu_time": 1.1946700599999986e+04,
-      "time_unit": "ms"
+      "real_time": 1.2558804403997783e+01,
+      "cpu_time": 1.2480040199999848e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1166,9 +1166,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1795910005999758e+04,
-      "cpu_time": 1.1440001499999880e+04,
-      "time_unit": "ms"
+      "real_time": 1.2469534460000432e+01,
+      "cpu_time": 1.2126553199999989e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1180,9 +1180,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2096402660001331e+04,
-      "cpu_time": 1.1335165499999903e+04,
-      "time_unit": "ms"
+      "real_time": 1.2713102568999602e+01,
+      "cpu_time": 1.2008357799999885e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1194,9 +1194,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2125506026000949e+04,
-      "cpu_time": 1.1480504800000062e+04,
-      "time_unit": "ms"
+      "real_time": 1.2522654315998807e+01,
+      "cpu_time": 1.2176987900000086e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1208,9 +1208,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1836768160999782e+04,
-      "cpu_time": 1.1187754399999903e+04,
-      "time_unit": "ms"
+      "real_time": 1.2494390324998676e+01,
+      "cpu_time": 1.2494392399999924e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1222,9 +1222,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1922475695999310e+04,
-      "cpu_time": 1.1583872899999960e+04,
-      "time_unit": "ms"
+      "real_time": 1.2607140138999966e+01,
+      "cpu_time": 1.2130305099999987e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1236,9 +1236,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1734823664999567e+04,
-      "cpu_time": 1.1373388199999908e+04,
-      "time_unit": "ms"
+      "real_time": 1.2229400468000676e+01,
+      "cpu_time": 1.2052671799999871e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1250,9 +1250,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1446956882002269e+04,
-      "cpu_time": 1.1309211900000037e+04,
-      "time_unit": "ms"
+      "real_time": 1.2538688728000125e+01,
+      "cpu_time": 1.2538690700000188e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1264,9 +1264,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1866345595000894e+04,
-      "cpu_time": 1.1549037499999940e+04,
-      "time_unit": "ms"
+      "real_time": 1.2233949315999780e+01,
+      "cpu_time": 1.2233932899999900e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1278,9 +1278,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1783439310001995e+04,
-      "cpu_time": 1.1279221499999949e+04,
-      "time_unit": "ms"
+      "real_time": 1.1775655114997789e+01,
+      "cpu_time": 1.1774617799999987e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1292,9 +1292,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1860358324000117e+04,
-      "cpu_time": 1.1789102199999888e+04,
-      "time_unit": "ms"
+      "real_time": 1.2239217987997108e+01,
+      "cpu_time": 1.2239196800000173e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1306,9 +1306,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1816055121002137e+04,
-      "cpu_time": 1.1302426199999900e+04,
-      "time_unit": "ms"
+      "real_time": 1.2497818593001284e+01,
+      "cpu_time": 1.2337163099999998e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1320,9 +1320,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1877956642998470e+04,
-      "cpu_time": 1.1662038400000029e+04,
-      "time_unit": "ms"
+      "real_time": 1.2461424649998662e+01,
+      "cpu_time": 1.2343448099999932e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13",
@@ -1334,9 +1334,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.1970580590997997e+04,
-      "cpu_time": 1.1706940399999894e+04,
-      "time_unit": "ms"
+      "real_time": 1.2491572307997558e+01,
+      "cpu_time": 1.1901094499999999e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13_mean",
@@ -1349,9 +1349,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.1884872097849986e+04,
-      "cpu_time": 1.1550528964999956e+04,
-      "time_unit": "ms"
+      "real_time": 1.2373380082249241e+01,
+      "cpu_time": 1.2160990969999979e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13_median",
@@ -1364,9 +1364,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.1863351959500505e+04,
-      "cpu_time": 1.1514771150000002e+04,
-      "time_unit": "ms"
+      "real_time": 1.2438992115497967e+01,
+      "cpu_time": 1.2130251550000025e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13_stddev",
@@ -1379,9 +1379,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.9648015392772155e+02,
-      "cpu_time": 2.3610706121412795e+02,
-      "time_unit": "ms"
+      "real_time": 2.1341247040433903e-01,
+      "cpu_time": 2.1439708493819637e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/13_cv",
@@ -1394,9 +1394,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 1.6531953588567898e-02,
-      "cpu_time": 2.0441233637833560e-02,
-      "time_unit": "ms"
+      "real_time": 1.7247709921276801e-02,
+      "cpu_time": 1.7629902486326472e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1408,9 +1408,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2234911345000000e+04,
-      "cpu_time": 1.1981221399999868e+04,
-      "time_unit": "ms"
+      "real_time": 1.3066108850001910e+01,
+      "cpu_time": 1.2607959999999821e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1422,9 +1422,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2167291447000025e+04,
-      "cpu_time": 1.1801762800000006e+04,
-      "time_unit": "ms"
+      "real_time": 1.2825141254001210e+01,
+      "cpu_time": 1.2657365499999969e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1436,9 +1436,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2544759411997802e+04,
-      "cpu_time": 1.2405591400000048e+04,
-      "time_unit": "ms"
+      "real_time": 1.2598298128999886e+01,
+      "cpu_time": 1.2164085899999918e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1450,9 +1450,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2192778845997964e+04,
-      "cpu_time": 1.1990817900000138e+04,
-      "time_unit": "ms"
+      "real_time": 1.2766706688002159e+01,
+      "cpu_time": 1.2662481500000013e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1464,9 +1464,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2156824822999624e+04,
-      "cpu_time": 1.1519086200000174e+04,
-      "time_unit": "ms"
+      "real_time": 1.2902648793999106e+01,
+      "cpu_time": 1.2665754299999890e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1478,9 +1478,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2272379324000212e+04,
-      "cpu_time": 1.1858532599999990e+04,
-      "time_unit": "ms"
+      "real_time": 1.2749132520002604e+01,
+      "cpu_time": 1.2454163000000108e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1492,9 +1492,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2217524289000721e+04,
-      "cpu_time": 1.2005995299999995e+04,
-      "time_unit": "ms"
+      "real_time": 1.2786977370000386e+01,
+      "cpu_time": 1.2527648699999872e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1506,9 +1506,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2551584516997536e+04,
-      "cpu_time": 1.1981040000000121e+04,
-      "time_unit": "ms"
+      "real_time": 1.2997905431999243e+01,
+      "cpu_time": 1.2331540999999788e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1520,9 +1520,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2611981553000078e+04,
-      "cpu_time": 1.1896994299999960e+04,
-      "time_unit": "ms"
+      "real_time": 1.2979758334000508e+01,
+      "cpu_time": 1.2939881600000035e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1534,9 +1534,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2634954266999557e+04,
-      "cpu_time": 1.2545227300000079e+04,
-      "time_unit": "ms"
+      "real_time": 1.3000997068000288e+01,
+      "cpu_time": 1.2828966799999989e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1548,9 +1548,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2933858271000645e+04,
-      "cpu_time": 1.2254537300000038e+04,
-      "time_unit": "ms"
+      "real_time": 1.2912732966000476e+01,
+      "cpu_time": 1.2379179499999964e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1562,9 +1562,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2404315599000256e+04,
-      "cpu_time": 1.1799202500000092e+04,
-      "time_unit": "ms"
+      "real_time": 1.2889935203998903e+01,
+      "cpu_time": 1.2452852299999904e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1576,9 +1576,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2673230436001177e+04,
-      "cpu_time": 1.2136712200000147e+04,
-      "time_unit": "ms"
+      "real_time": 1.2831531312000152e+01,
+      "cpu_time": 1.2389576300000044e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1590,9 +1590,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2240369382001518e+04,
-      "cpu_time": 1.2066845399999920e+04,
-      "time_unit": "ms"
+      "real_time": 1.2573737700000493e+01,
+      "cpu_time": 1.2573728999999958e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1604,9 +1604,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2347735840998212e+04,
-      "cpu_time": 1.2347737000000052e+04,
-      "time_unit": "ms"
+      "real_time": 1.2944408282000950e+01,
+      "cpu_time": 1.2324163799999951e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1618,9 +1618,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2039327889000560e+04,
-      "cpu_time": 1.1895742400000017e+04,
-      "time_unit": "ms"
+      "real_time": 1.2830756624000060e+01,
+      "cpu_time": 1.2830438200000117e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1632,9 +1632,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2010253634998662e+04,
-      "cpu_time": 1.1866839900000059e+04,
-      "time_unit": "ms"
+      "real_time": 1.2715529611999955e+01,
+      "cpu_time": 1.2692409499999940e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1646,9 +1646,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2775639806000981e+04,
-      "cpu_time": 1.2352066799999875e+04,
-      "time_unit": "ms"
+      "real_time": 1.2862995231997047e+01,
+      "cpu_time": 1.2462040300000126e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1660,9 +1660,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2673008658999606e+04,
-      "cpu_time": 1.2113848100000041e+04,
-      "time_unit": "ms"
+      "real_time": 1.2876392911999574e+01,
+      "cpu_time": 1.2441409999999905e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14",
@@ -1674,9 +1674,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2270136913000897e+04,
-      "cpu_time": 1.1777067299999999e+04,
-      "time_unit": "ms"
+      "real_time": 1.2810119394998765e+01,
+      "cpu_time": 1.2594995700000027e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14_mean",
@@ -1689,9 +1689,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.2397643312699802e+04,
-      "cpu_time": 1.2029843405000032e+04,
-      "time_unit": "ms"
+      "real_time": 1.2846090683900183e+01,
+      "cpu_time": 1.2549032144999968e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14_median",
@@ -1704,9 +1704,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.2310057582499212e+04,
-      "cpu_time": 1.1986019650000004e+04,
-      "time_unit": "ms"
+      "real_time": 1.2847263271998600e+01,
+      "cpu_time": 1.2550688849999915e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14_stddev",
@@ -1719,9 +1719,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 2.5949446089787637e+02,
-      "cpu_time": 2.5239873998981915e+02,
-      "time_unit": "ms"
+      "real_time": 1.2726928244747099e-01,
+      "cpu_time": 1.9378298982667960e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/14_cv",
@@ -1734,9 +1734,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 2.0930950693835285e-02,
-      "cpu_time": 2.0981049502682075e-02,
-      "time_unit": "ms"
+      "real_time": 9.9072383637284836e-03,
+      "cpu_time": 1.5442066574344574e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1748,9 +1748,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2765972426997905e+04,
-      "cpu_time": 1.2150284800000009e+04,
-      "time_unit": "ms"
+      "real_time": 1.3296699266000360e+01,
+      "cpu_time": 1.2989401499999985e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1762,9 +1762,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3204061437001656e+04,
-      "cpu_time": 1.2405672999999979e+04,
-      "time_unit": "ms"
+      "real_time": 1.3177544301001035e+01,
+      "cpu_time": 1.2677376500000037e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1776,9 +1776,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2789603244000318e+04,
-      "cpu_time": 1.2278475500000013e+04,
-      "time_unit": "ms"
+      "real_time": 1.3327240660000825e+01,
+      "cpu_time": 1.3184329500000104e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1790,9 +1790,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2846611928001948e+04,
-      "cpu_time": 1.2153168099999903e+04,
-      "time_unit": "ms"
+      "real_time": 1.3038955582000199e+01,
+      "cpu_time": 1.2784573800000089e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1804,9 +1804,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2482135416998062e+04,
-      "cpu_time": 1.2449388600000020e+04,
-      "time_unit": "ms"
+      "real_time": 1.3202954598000360e+01,
+      "cpu_time": 1.2614181599999938e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1818,9 +1818,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2826665131000482e+04,
-      "cpu_time": 1.2171369299999924e+04,
-      "time_unit": "ms"
+      "real_time": 1.3499369802000729e+01,
+      "cpu_time": 1.3002352499999915e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1832,9 +1832,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2713662743997702e+04,
-      "cpu_time": 1.2569577900000013e+04,
-      "time_unit": "ms"
+      "real_time": 1.3125774456999352e+01,
+      "cpu_time": 1.2915440899999794e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1846,9 +1846,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2810742210996978e+04,
-      "cpu_time": 1.2292415699999992e+04,
-      "time_unit": "ms"
+      "real_time": 1.3168863219001651e+01,
+      "cpu_time": 1.2827526999999918e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1860,9 +1860,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2888286068002344e+04,
-      "cpu_time": 1.2289642799999910e+04,
-      "time_unit": "ms"
+      "real_time": 1.3486835463001626e+01,
+      "cpu_time": 1.2971247799999901e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1874,9 +1874,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3179541108998819e+04,
-      "cpu_time": 1.2870900900000152e+04,
-      "time_unit": "ms"
+      "real_time": 1.3224263735999557e+01,
+      "cpu_time": 1.2648957500000051e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1888,9 +1888,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3382122179998987e+04,
-      "cpu_time": 1.2514691899999889e+04,
-      "time_unit": "ms"
+      "real_time": 1.3222785862999444e+01,
+      "cpu_time": 1.2713617400000203e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1902,9 +1902,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3020716458999232e+04,
-      "cpu_time": 1.2441911899999923e+04,
-      "time_unit": "ms"
+      "real_time": 1.3573668418997840e+01,
+      "cpu_time": 1.2880158100000017e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1916,9 +1916,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3004861476998485e+04,
-      "cpu_time": 1.2502746000000116e+04,
-      "time_unit": "ms"
+      "real_time": 1.3115683272000751e+01,
+      "cpu_time": 1.2430444399999942e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1930,9 +1930,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2834670404001372e+04,
-      "cpu_time": 1.2559921199999962e+04,
-      "time_unit": "ms"
+      "real_time": 1.3157283248998283e+01,
+      "cpu_time": 1.3146574300000111e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1944,9 +1944,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2474052526002197e+04,
-      "cpu_time": 1.2298062099999925e+04,
-      "time_unit": "ms"
+      "real_time": 1.3063968284997827e+01,
+      "cpu_time": 1.2969496799999888e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1958,9 +1958,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2383618812000350e+04,
-      "cpu_time": 1.2195729699999902e+04,
-      "time_unit": "ms"
+      "real_time": 1.3331643503002852e+01,
+      "cpu_time": 1.2898295899999994e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1972,9 +1972,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2810584751001443e+04,
-      "cpu_time": 1.2646117199999935e+04,
-      "time_unit": "ms"
+      "real_time": 1.3253367420998984e+01,
+      "cpu_time": 1.2912263000000166e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -1986,9 +1986,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2682928217000153e+04,
-      "cpu_time": 1.2581210199999987e+04,
-      "time_unit": "ms"
+      "real_time": 1.3380619714000204e+01,
+      "cpu_time": 1.3155424400000129e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -2000,9 +2000,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3123269687002903e+04,
-      "cpu_time": 1.2845235500000172e+04,
-      "time_unit": "ms"
+      "real_time": 1.3332790230000683e+01,
+      "cpu_time": 1.2712668399999984e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15",
@@ -2014,9 +2014,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.2824362888000906e+04,
-      "cpu_time": 1.2322676799999954e+04,
-      "time_unit": "ms"
+      "real_time": 1.3215343951000250e+01,
+      "cpu_time": 1.2975772799999959e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15_mean",
@@ -2029,9 +2029,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.2852423455850112e+04,
-      "cpu_time": 1.2426959954999986e+04,
-      "time_unit": "ms"
+      "real_time": 1.3259782749550141e+01,
+      "cpu_time": 1.2870505205000006e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15_median",
@@ -2044,9 +2044,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.2825514009500694e+04,
-      "cpu_time": 1.2423792449999952e+04,
-      "time_unit": "ms"
+      "real_time": 1.3223524799499501e+01,
+      "cpu_time": 1.2905279450000080e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15_stddev",
@@ -2059,9 +2059,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 2.5154116666554881e+02,
-      "cpu_time": 2.1192107749864721e+02,
-      "time_unit": "ms"
+      "real_time": 1.4468302963773597e-01,
+      "cpu_time": 1.9568393971921930e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/15_cv",
@@ -2074,9 +2074,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 1.9571496965504458e-02,
-      "cpu_time": 1.7053332292535535e-02,
-      "time_unit": "ms"
+      "real_time": 1.0911417809062110e-02,
+      "cpu_time": 1.5204060493538271e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2088,9 +2088,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3576221044000704e+04,
-      "cpu_time": 1.3152620000000070e+04,
-      "time_unit": "ms"
+      "real_time": 1.3802613895997638e+01,
+      "cpu_time": 1.3229984900000090e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2102,9 +2102,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3334882328999811e+04,
-      "cpu_time": 1.2662835399999949e+04,
-      "time_unit": "ms"
+      "real_time": 1.3571952315000090e+01,
+      "cpu_time": 1.3031412799999998e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2116,9 +2116,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3534985320002306e+04,
-      "cpu_time": 1.3225275199999942e+04,
-      "time_unit": "ms"
+      "real_time": 1.3513255874997412e+01,
+      "cpu_time": 1.3094284099999868e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2130,9 +2130,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3229808470998250e+04,
-      "cpu_time": 1.2698008200000004e+04,
-      "time_unit": "ms"
+      "real_time": 1.3925921729998663e+01,
+      "cpu_time": 1.3338230999999723e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2144,9 +2144,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3350603851002234e+04,
-      "cpu_time": 1.3208227700000180e+04,
-      "time_unit": "ms"
+      "real_time": 1.3562959520000732e+01,
+      "cpu_time": 1.3147875699999986e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2158,9 +2158,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3289852128997154e+04,
-      "cpu_time": 1.2940393899999890e+04,
-      "time_unit": "ms"
+      "real_time": 1.3620800700002292e+01,
+      "cpu_time": 1.3290381700000125e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2172,9 +2172,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3314156280997850e+04,
-      "cpu_time": 1.3129032399999915e+04,
-      "time_unit": "ms"
+      "real_time": 1.3756253294999624e+01,
+      "cpu_time": 1.3417070599999988e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2186,9 +2186,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3551789488999930e+04,
-      "cpu_time": 1.3496276399999942e+04,
-      "time_unit": "ms"
+      "real_time": 1.3764617921999161e+01,
+      "cpu_time": 1.3428463600000214e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2200,9 +2200,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3569092467001610e+04,
-      "cpu_time": 1.3507252800000060e+04,
-      "time_unit": "ms"
+      "real_time": 1.3688076057002036e+01,
+      "cpu_time": 1.3428178500000286e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2214,9 +2214,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3590606058001867e+04,
-      "cpu_time": 1.3525911200000337e+04,
-      "time_unit": "ms"
+      "real_time": 1.3637565043998620e+01,
+      "cpu_time": 1.3354332399999748e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2228,9 +2228,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3761633873000392e+04,
-      "cpu_time": 1.3225959099999727e+04,
-      "time_unit": "ms"
+      "real_time": 1.3711479533001693e+01,
+      "cpu_time": 1.3147401200000331e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2242,9 +2242,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3641413565997937e+04,
-      "cpu_time": 1.3539956099999927e+04,
-      "time_unit": "ms"
+      "real_time": 1.3428831181998248e+01,
+      "cpu_time": 1.3225839400000041e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2256,9 +2256,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3550628848999622e+04,
-      "cpu_time": 1.2826770000000124e+04,
-      "time_unit": "ms"
+      "real_time": 1.3858133227997314e+01,
+      "cpu_time": 1.3189358999999968e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2270,9 +2270,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3412272356999893e+04,
-      "cpu_time": 1.3184819599999628e+04,
-      "time_unit": "ms"
+      "real_time": 1.3640516420000495e+01,
+      "cpu_time": 1.2934264100000291e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2284,9 +2284,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3321604690998356e+04,
-      "cpu_time": 1.2707897400000093e+04,
-      "time_unit": "ms"
+      "real_time": 1.4036039513001015e+01,
+      "cpu_time": 1.3519960200000241e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2298,9 +2298,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3505847608998010e+04,
-      "cpu_time": 1.2951465100000405e+04,
-      "time_unit": "ms"
+      "real_time": 1.4102738649999083e+01,
+      "cpu_time": 1.3848623500000031e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2312,9 +2312,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3299155393000547e+04,
-      "cpu_time": 1.2596747399999913e+04,
-      "time_unit": "ms"
+      "real_time": 1.3988314154001273e+01,
+      "cpu_time": 1.3576713399999790e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2326,9 +2326,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3443289380000351e+04,
-      "cpu_time": 1.3332551700000295e+04,
-      "time_unit": "ms"
+      "real_time": 1.4193485874002363e+01,
+      "cpu_time": 1.3866456199999902e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2340,9 +2340,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3444115242000407e+04,
-      "cpu_time": 1.3141089599999759e+04,
-      "time_unit": "ms"
+      "real_time": 1.4055786719000025e+01,
+      "cpu_time": 1.3810707599999660e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16",
@@ -2354,9 +2354,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3891035312000895e+04,
-      "cpu_time": 1.3763974599999983e+04,
-      "time_unit": "ms"
+      "real_time": 1.4018482733998098e+01,
+      "cpu_time": 1.3502265200000238e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16_mean",
@@ -2369,9 +2369,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.3480649685549904e+04,
-      "cpu_time": 1.3140853190000005e+04,
-      "time_unit": "ms"
+      "real_time": 1.3793891218049794e+01,
+      "cpu_time": 1.3369090255000026e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16_median",
@@ -2384,9 +2384,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.3474981425499209e+04,
-      "cpu_time": 1.3168719799999850e+04,
-      "time_unit": "ms"
+      "real_time": 1.3760435608499392e+01,
+      "cpu_time": 1.3346281699999736e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16_stddev",
@@ -2399,9 +2399,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.6962059673051255e+02,
-      "cpu_time": 3.3222463850913130e+02,
-      "time_unit": "ms"
+      "real_time": 2.1824176998472930e-01,
+      "cpu_time": 2.6372973051570142e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/16_cv",
@@ -2414,9 +2414,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 1.2582523890694319e-02,
-      "cpu_time": 2.5281816462415792e-02,
-      "time_unit": "ms"
+      "real_time": 1.5821624698558755e-02,
+      "cpu_time": 1.9726826993113220e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2428,9 +2428,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4026845112999581e+04,
-      "cpu_time": 1.3604881800000385e+04,
-      "time_unit": "ms"
+      "real_time": 1.4553023636999569e+01,
+      "cpu_time": 1.4136257699999987e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2442,9 +2442,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4208976539997821e+04,
-      "cpu_time": 1.3423790700000154e+04,
-      "time_unit": "ms"
+      "real_time": 1.4411591220999981e+01,
+      "cpu_time": 1.4150131900000360e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2456,9 +2456,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4047660402000474e+04,
-      "cpu_time": 1.3088739999999689e+04,
-      "time_unit": "ms"
+      "real_time": 1.4507339540999965e+01,
+      "cpu_time": 1.4344194700000116e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2470,9 +2470,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4148051536001731e+04,
-      "cpu_time": 1.3685681099999783e+04,
-      "time_unit": "ms"
+      "real_time": 1.4397611096002947e+01,
+      "cpu_time": 1.4007053900000301e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2484,9 +2484,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4033378018000803e+04,
-      "cpu_time": 1.3548998500000380e+04,
-      "time_unit": "ms"
+      "real_time": 1.4400368689999596e+01,
+      "cpu_time": 1.4273442300000170e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2498,9 +2498,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3902776908002124e+04,
-      "cpu_time": 1.3547353100000237e+04,
-      "time_unit": "ms"
+      "real_time": 1.4451045170000725e+01,
+      "cpu_time": 1.4445775099999992e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2512,9 +2512,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3858418960000563e+04,
-      "cpu_time": 1.3691978199999994e+04,
-      "time_unit": "ms"
+      "real_time": 1.4644194906999473e+01,
+      "cpu_time": 1.4269624999999905e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2526,9 +2526,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4127990274002514e+04,
-      "cpu_time": 1.3847201099999893e+04,
-      "time_unit": "ms"
+      "real_time": 1.4459373588997551e+01,
+      "cpu_time": 1.4248671300000296e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2540,9 +2540,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3830950879000738e+04,
-      "cpu_time": 1.3379608899999766e+04,
-      "time_unit": "ms"
+      "real_time": 1.4445033382999100e+01,
+      "cpu_time": 1.4243387500000154e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2554,9 +2554,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4241487070998119e+04,
-      "cpu_time": 1.4204429300000356e+04,
-      "time_unit": "ms"
+      "real_time": 1.4365604424998310e+01,
+      "cpu_time": 1.4188786300000174e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2568,9 +2568,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4219603367000673e+04,
-      "cpu_time": 1.3893745800000033e+04,
-      "time_unit": "ms"
+      "real_time": 1.4419856910000817e+01,
+      "cpu_time": 1.4061424200000147e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2582,9 +2582,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4127886217000196e+04,
-      "cpu_time": 1.3838969400000224e+04,
-      "time_unit": "ms"
+      "real_time": 1.4454123816998617e+01,
+      "cpu_time": 1.4276464600000054e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2596,9 +2596,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4261613171998761e+04,
-      "cpu_time": 1.3562659600000188e+04,
-      "time_unit": "ms"
+      "real_time": 1.4488031438002508e+01,
+      "cpu_time": 1.4083681799999795e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2610,9 +2610,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3915243477997137e+04,
-      "cpu_time": 1.3352482400000099e+04,
-      "time_unit": "ms"
+      "real_time": 1.4313451403999352e+01,
+      "cpu_time": 1.3945364400000017e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2624,9 +2624,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4041029199001059e+04,
-      "cpu_time": 1.3356206599999950e+04,
-      "time_unit": "ms"
+      "real_time": 1.4002273316000355e+01,
+      "cpu_time": 1.3684444099999837e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2638,9 +2638,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.3774264929998026e+04,
-      "cpu_time": 1.3413399899999604e+04,
-      "time_unit": "ms"
+      "real_time": 1.4114152633999765e+01,
+      "cpu_time": 1.3428214600000047e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2652,9 +2652,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4269376692001970e+04,
-      "cpu_time": 1.3965801000000283e+04,
-      "time_unit": "ms"
+      "real_time": 1.3960215115999745e+01,
+      "cpu_time": 1.3695072800000162e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2666,9 +2666,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4192966131002322e+04,
-      "cpu_time": 1.3801312099999905e+04,
-      "time_unit": "ms"
+      "real_time": 1.3895154927002295e+01,
+      "cpu_time": 1.3621342299999924e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2680,9 +2680,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4230734947999736e+04,
-      "cpu_time": 1.3756394699999873e+04,
-      "time_unit": "ms"
+      "real_time": 1.3993748799999594e+01,
+      "cpu_time": 1.3792601000000104e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17",
@@ -2694,9 +2694,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4102657357001590e+04,
-      "cpu_time": 1.3562144400000307e+04,
-      "time_unit": "ms"
+      "real_time": 1.4044500716001494e+01,
+      "cpu_time": 1.3709496899999976e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17_mean",
@@ -2709,9 +2709,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.4078095559600299e+04,
-      "cpu_time": 1.3626288930000057e+04,
-      "time_unit": "ms"
+      "real_time": 1.4316034736850089e+01,
+      "cpu_time": 1.4030271620000075e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17_median",
@@ -2724,9 +2724,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.4115271787000893e+04,
-      "cpu_time": 1.3583770700000288e+04,
-      "time_unit": "ms"
+      "real_time": 1.4405979955499788e+01,
+      "cpu_time": 1.4109969749999891e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17_stddev",
@@ -2739,9 +2739,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.5336802483105734e+02,
-      "cpu_time": 2.5908381156720009e+02,
-      "time_unit": "ms"
+      "real_time": 2.2492175572811890e-01,
+      "cpu_time": 2.8327715868945036e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/17_cv",
@@ -2754,9 +2754,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 1.0894088918615900e-02,
-      "cpu_time": 1.9013526932985633e-02,
-      "time_unit": "ms"
+      "real_time": 1.5711177002746483e-02,
+      "cpu_time": 2.0190425842193979e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2768,9 +2768,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4703987018001499e+04,
-      "cpu_time": 1.4089282200000071e+04,
-      "time_unit": "ms"
+      "real_time": 1.4375674754999636e+01,
+      "cpu_time": 1.4198181800000384e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2782,9 +2782,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4592470109000715e+04,
-      "cpu_time": 1.3985984100000223e+04,
-      "time_unit": "ms"
+      "real_time": 1.4549204670001927e+01,
+      "cpu_time": 1.4208462900000086e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2796,9 +2796,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4595050369996898e+04,
-      "cpu_time": 1.4198909999999614e+04,
-      "time_unit": "ms"
+      "real_time": 1.4606985009002528e+01,
+      "cpu_time": 1.4226343499999984e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2810,9 +2810,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4568653364996862e+04,
-      "cpu_time": 1.4403902700000344e+04,
-      "time_unit": "ms"
+      "real_time": 1.4559055580997665e+01,
+      "cpu_time": 1.4252691799999866e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2824,9 +2824,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4647137092997582e+04,
-      "cpu_time": 1.4336426399999709e+04,
-      "time_unit": "ms"
+      "real_time": 1.4684642217001965e+01,
+      "cpu_time": 1.4517873199999940e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2838,9 +2838,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4846067042999493e+04,
-      "cpu_time": 1.4457625000000007e+04,
-      "time_unit": "ms"
+      "real_time": 1.4525551678001648e+01,
+      "cpu_time": 1.4291438200000357e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2852,9 +2852,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4867048608000914e+04,
-      "cpu_time": 1.4489620900000318e+04,
-      "time_unit": "ms"
+      "real_time": 1.4529949297997518e+01,
+      "cpu_time": 1.4396668299999874e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2866,9 +2866,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5179644719999487e+04,
-      "cpu_time": 1.4599469299999782e+04,
-      "time_unit": "ms"
+      "real_time": 1.4515303655000025e+01,
+      "cpu_time": 1.4515304600000036e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2880,9 +2880,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4877781769002468e+04,
-      "cpu_time": 1.4343941600000107e+04,
-      "time_unit": "ms"
+      "real_time": 1.4587187948000064e+01,
+      "cpu_time": 1.4287017999999989e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2894,9 +2894,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.4912553335001576e+04,
-      "cpu_time": 1.4521965100000216e+04,
-      "time_unit": "ms"
+      "real_time": 1.4591664406001655e+01,
+      "cpu_time": 1.4187545700000101e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2908,9 +2908,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5096558872002788e+04,
-      "cpu_time": 1.4513450999999804e+04,
-      "time_unit": "ms"
+      "real_time": 1.4549090944001364e+01,
+      "cpu_time": 1.4092362800000046e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2922,9 +2922,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5149709101999179e+04,
-      "cpu_time": 1.4771927000000233e+04,
-      "time_unit": "ms"
+      "real_time": 1.4510290901998815e+01,
+      "cpu_time": 1.4228250800000296e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2936,9 +2936,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5721661546001997e+04,
-      "cpu_time": 1.5213374500000100e+04,
-      "time_unit": "ms"
+      "real_time": 1.4588619185000425e+01,
+      "cpu_time": 1.4574823100000231e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2950,9 +2950,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6312257218000013e+04,
-      "cpu_time": 1.6150397000000339e+04,
-      "time_unit": "ms"
+      "real_time": 1.4513948625000921e+01,
+      "cpu_time": 1.4359238099999857e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2964,9 +2964,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5571696392002195e+04,
-      "cpu_time": 1.5565733899999941e+04,
-      "time_unit": "ms"
+      "real_time": 1.4447591440999531e+01,
+      "cpu_time": 1.4241870699999708e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2978,9 +2978,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5451881750999746e+04,
-      "cpu_time": 1.5373057200000403e+04,
-      "time_unit": "ms"
+      "real_time": 1.4460323596002127e+01,
+      "cpu_time": 1.3807154500000252e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -2992,9 +2992,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5351446438999119e+04,
-      "cpu_time": 1.5149194199999783e+04,
-      "time_unit": "ms"
+      "real_time": 1.4567127629001334e+01,
+      "cpu_time": 1.4210527600000205e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -3006,9 +3006,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5509701799001050e+04,
-      "cpu_time": 1.5356985299999906e+04,
-      "time_unit": "ms"
+      "real_time": 1.4472693438998249e+01,
+      "cpu_time": 1.4208239900000081e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -3020,9 +3020,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5268788235000102e+04,
-      "cpu_time": 1.5085400599999957e+04,
-      "time_unit": "ms"
+      "real_time": 1.4631918699000380e+01,
+      "cpu_time": 1.4456723400000101e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18",
@@ -3034,9 +3034,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.5378226210999856e+04,
-      "cpu_time": 1.5194306699999743e+04,
-      "time_unit": "ms"
+      "real_time": 1.4585408648999874e+01,
+      "cpu_time": 1.4109194800000296e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18_mean",
@@ -3049,9 +3049,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.5130116049750179e+04,
-      "cpu_time": 1.4790047735000029e+04,
-      "time_unit": "ms"
+      "real_time": 1.4542611616300382e+01,
+      "cpu_time": 1.4268495685000085e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18_median",
@@ -3064,9 +3064,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.5123133987000983e+04,
-      "cpu_time": 1.4560717199999999e+04,
-      "time_unit": "ms"
+      "real_time": 1.4549147807001646e+01,
+      "cpu_time": 1.4235060750000002e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18_stddev",
@@ -3079,9 +3079,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 4.5248333511396640e+02,
-      "cpu_time": 5.6657405017304359e+02,
-      "time_unit": "ms"
+      "real_time": 7.0041601331046061e-02,
+      "cpu_time": 1.7374877267532329e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/18_cv",
@@ -3094,9 +3094,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 2.9906137773572303e-02,
-      "cpu_time": 3.8307790503763539e-02,
-      "time_unit": "ms"
+      "real_time": 4.8163014442700576e-03,
+      "cpu_time": 1.2177091160210998e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3108,9 +3108,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6240068119001080e+04,
-      "cpu_time": 1.6102033500000289e+04,
-      "time_unit": "ms"
+      "real_time": 1.5119576419998339e+01,
+      "cpu_time": 1.4827469800000017e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3122,9 +3122,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6205349931002274e+04,
-      "cpu_time": 1.6050905599999624e+04,
-      "time_unit": "ms"
+      "real_time": 1.5183734610000101e+01,
+      "cpu_time": 1.4915175899999667e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3136,9 +3136,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6309970545000397e+04,
-      "cpu_time": 1.6222212000000127e+04,
-      "time_unit": "ms"
+      "real_time": 1.5087250517000939e+01,
+      "cpu_time": 1.4870943599999919e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3150,9 +3150,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6309062915002869e+04,
-      "cpu_time": 1.6186366200000066e+04,
-      "time_unit": "ms"
+      "real_time": 1.5237821268001426e+01,
+      "cpu_time": 1.4427349200000208e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3164,9 +3164,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6221384817999933e+04,
-      "cpu_time": 1.6093181799999911e+04,
-      "time_unit": "ms"
+      "real_time": 1.5173706986999605e+01,
+      "cpu_time": 1.4990476499999659e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3178,9 +3178,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6394896376001270e+04,
-      "cpu_time": 1.6351462800000263e+04,
-      "time_unit": "ms"
+      "real_time": 1.5096556199998304e+01,
+      "cpu_time": 1.5095430899999883e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3192,9 +3192,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6097894955997617e+04,
-      "cpu_time": 1.6060347600000114e+04,
-      "time_unit": "ms"
+      "real_time": 1.5181577323000965e+01,
+      "cpu_time": 1.5007763099999920e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3206,9 +3206,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6230728047998127e+04,
-      "cpu_time": 1.6211338699999942e+04,
-      "time_unit": "ms"
+      "real_time": 1.5226738247998583e+01,
+      "cpu_time": 1.5043445300000258e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3220,9 +3220,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6102874531999987e+04,
-      "cpu_time": 1.5860887300000286e+04,
-      "time_unit": "ms"
+      "real_time": 1.5091359649999504e+01,
+      "cpu_time": 1.4714164299999993e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3234,9 +3234,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6158148987000459e+04,
-      "cpu_time": 1.6041177999999945e+04,
-      "time_unit": "ms"
+      "real_time": 1.5046255762001238e+01,
+      "cpu_time": 1.4881816799999797e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3248,9 +3248,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6078743820999080e+04,
-      "cpu_time": 1.5882792899999913e+04,
-      "time_unit": "ms"
+      "real_time": 1.5141890984003112e+01,
+      "cpu_time": 1.4917384899999888e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3262,9 +3262,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6210182243001327e+04,
-      "cpu_time": 1.6121439200000168e+04,
-      "time_unit": "ms"
+      "real_time": 1.5048712362997321e+01,
+      "cpu_time": 1.4796040600000197e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3276,9 +3276,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6138526554997952e+04,
-      "cpu_time": 1.5973489699999845e+04,
-      "time_unit": "ms"
+      "real_time": 1.5159391109998978e+01,
+      "cpu_time": 1.4664385000000038e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3290,9 +3290,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6382799201997841e+04,
-      "cpu_time": 1.6339388500000041e+04,
-      "time_unit": "ms"
+      "real_time": 1.5029063452999253e+01,
+      "cpu_time": 1.4809481900000264e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3304,9 +3304,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6271118117001606e+04,
-      "cpu_time": 1.6198944300000221e+04,
-      "time_unit": "ms"
+      "real_time": 1.5100895937001042e+01,
+      "cpu_time": 1.4939598299999943e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3318,9 +3318,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6275543813000695e+04,
-      "cpu_time": 1.6238038400000278e+04,
-      "time_unit": "ms"
+      "real_time": 1.5086004502001742e+01,
+      "cpu_time": 1.5079399199999898e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3332,9 +3332,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6234773387001042e+04,
-      "cpu_time": 1.6234775399999762e+04,
-      "time_unit": "ms"
+      "real_time": 1.5158622364997427e+01,
+      "cpu_time": 1.4914846600000146e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3346,9 +3346,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6153056011000444e+04,
-      "cpu_time": 1.6119414400000096e+04,
-      "time_unit": "ms"
+      "real_time": 1.5083412232997944e+01,
+      "cpu_time": 1.4758950599999935e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3360,9 +3360,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6167216999998345e+04,
-      "cpu_time": 1.6095324900000378e+04,
-      "time_unit": "ms"
+      "real_time": 1.5285611350002000e+01,
+      "cpu_time": 1.4980962999999974e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19",
@@ -3374,9 +3374,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6195751491999545e+04,
-      "cpu_time": 1.6179754200000389e+04,
-      "time_unit": "ms"
+      "real_time": 1.5143819433000317e+01,
+      "cpu_time": 1.4998391500000253e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19_mean",
@@ -3389,9 +3389,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.6218904543400096e+04,
-      "cpu_time": 1.6128163770000083e+04,
-      "time_unit": "ms"
+      "real_time": 1.5134100035749906e+01,
+      "cpu_time": 1.4881673849999993e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19_median",
@@ -3404,9 +3404,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.6215783530500630e+04,
-      "cpu_time": 1.6120426800000132e+04,
-      "time_unit": "ms"
+      "real_time": 1.5130733702000725e+01,
+      "cpu_time": 1.4915011249999907e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19_stddev",
@@ -3419,9 +3419,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 8.7882317512290811e+01,
-      "cpu_time": 1.3009058618892178e+02,
-      "time_unit": "ms"
+      "real_time": 6.7918506665350042e-02,
+      "cpu_time": 1.5917093413265077e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/19_cv",
@@ -3434,9 +3434,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 5.4185112981660934e-03,
-      "cpu_time": 8.0660506703746793e-03,
-      "time_unit": "ms"
+      "real_time": 4.4877796832921901e-03,
+      "cpu_time": 1.0695768213778642e-02,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3448,9 +3448,9 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7309776232999866e+04,
-      "cpu_time": 1.7190496400000029e+04,
-      "time_unit": "ms"
+      "real_time": 1.5838184346001071e+01,
+      "cpu_time": 1.5597693400000026e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3462,9 +3462,9 @@
       "repetition_index": 1,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7138004528998863e+04,
-      "cpu_time": 1.7138002099999994e+04,
-      "time_unit": "ms"
+      "real_time": 1.5858080734000396e+01,
+      "cpu_time": 1.5627103600000282e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3476,9 +3476,9 @@
       "repetition_index": 2,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7068890892001946e+04,
-      "cpu_time": 1.6918209800000113e+04,
-      "time_unit": "ms"
+      "real_time": 1.5914354770000500e+01,
+      "cpu_time": 1.5797739800000272e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3490,9 +3490,9 @@
       "repetition_index": 3,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7017775303000235e+04,
-      "cpu_time": 1.6967824699999710e+04,
-      "time_unit": "ms"
+      "real_time": 1.5698304554000060e+01,
+      "cpu_time": 1.5357769899999766e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3504,9 +3504,9 @@
       "repetition_index": 4,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7124372382000729e+04,
-      "cpu_time": 1.6992514099999880e+04,
-      "time_unit": "ms"
+      "real_time": 1.5800839185998484e+01,
+      "cpu_time": 1.5762621200000012e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3518,9 +3518,9 @@
       "repetition_index": 5,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7054906375000428e+04,
-      "cpu_time": 1.7019932400000016e+04,
-      "time_unit": "ms"
+      "real_time": 1.5850927981999121e+01,
+      "cpu_time": 1.5583059500000218e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3532,9 +3532,9 @@
       "repetition_index": 6,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7064109232000192e+04,
-      "cpu_time": 1.7012233599999945e+04,
-      "time_unit": "ms"
+      "real_time": 1.5742606658997829e+01,
+      "cpu_time": 1.5235538500000075e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3546,9 +3546,9 @@
       "repetition_index": 7,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7122551038002712e+04,
-      "cpu_time": 1.7030431700000008e+04,
-      "time_unit": "ms"
+      "real_time": 1.5776921998000034e+01,
+      "cpu_time": 1.5663106699999844e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3560,9 +3560,9 @@
       "repetition_index": 8,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7097556968001300e+04,
-      "cpu_time": 1.6995357500000409e+04,
-      "time_unit": "ms"
+      "real_time": 1.5741561275001004e+01,
+      "cpu_time": 1.5697264600000381e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3574,9 +3574,9 @@
       "repetition_index": 9,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7104797274001612e+04,
-      "cpu_time": 1.6976857399999972e+04,
-      "time_unit": "ms"
+      "real_time": 1.5830809773000510e+01,
+      "cpu_time": 1.5781930699999975e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3588,9 +3588,9 @@
       "repetition_index": 10,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7041946428998926e+04,
-      "cpu_time": 1.6970563899999888e+04,
-      "time_unit": "ms"
+      "real_time": 1.5716636387998733e+01,
+      "cpu_time": 1.5591199100000267e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3602,9 +3602,9 @@
       "repetition_index": 11,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7013548461000028e+04,
-      "cpu_time": 1.6932168799999999e+04,
-      "time_unit": "ms"
+      "real_time": 1.5891054152001743e+01,
+      "cpu_time": 1.5487223999999969e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3616,9 +3616,9 @@
       "repetition_index": 12,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7063113870000961e+04,
-      "cpu_time": 1.6905849100000069e+04,
-      "time_unit": "ms"
+      "real_time": 1.5875556689999939e+01,
+      "cpu_time": 1.5458655699999781e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3630,9 +3630,9 @@
       "repetition_index": 13,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7167279978999431e+04,
-      "cpu_time": 1.7082531499999732e+04,
-      "time_unit": "ms"
+      "real_time": 1.5830323363999923e+01,
+      "cpu_time": 1.5598302100000183e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3644,9 +3644,9 @@
       "repetition_index": 14,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7065045093000663e+04,
-      "cpu_time": 1.6981935999999678e+04,
-      "time_unit": "ms"
+      "real_time": 1.5794407123001292e+01,
+      "cpu_time": 1.5565953799999988e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3658,9 +3658,9 @@
       "repetition_index": 15,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7035304356002598e+04,
-      "cpu_time": 1.6990625200000068e+04,
-      "time_unit": "ms"
+      "real_time": 1.5851361395998538e+01,
+      "cpu_time": 1.5287584600000173e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3672,9 +3672,9 @@
       "repetition_index": 16,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6991406757002551e+04,
-      "cpu_time": 1.6859232000000247e+04,
-      "time_unit": "ms"
+      "real_time": 1.5860626354999113e+01,
+      "cpu_time": 1.5769860000000335e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3686,9 +3686,9 @@
       "repetition_index": 17,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7126073154999176e+04,
-      "cpu_time": 1.7056079200000113e+04,
-      "time_unit": "ms"
+      "real_time": 1.5809851165002328e+01,
+      "cpu_time": 1.5785051800000019e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3700,9 +3700,9 @@
       "repetition_index": 18,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.7047555452998495e+04,
-      "cpu_time": 1.6890046900000016e+04,
-      "time_unit": "ms"
+      "real_time": 1.5826781424999353e+01,
+      "cpu_time": 1.5549886299999798e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20",
@@ -3714,9 +3714,9 @@
       "repetition_index": 19,
       "threads": 1,
       "iterations": 1,
-      "real_time": 1.6962701665001077e+04,
-      "cpu_time": 1.6910078699999758e+04,
-      "time_unit": "ms"
+      "real_time": 1.5767888738999318e+01,
+      "cpu_time": 1.5562014200000249e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20_mean",
@@ -3729,9 +3729,9 @@
       "aggregate_name": "mean",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.7080835772200589e+04,
-      "cpu_time": 1.6991048549999985e+04,
-      "time_unit": "ms"
+      "real_time": 1.5813853903699965e+01,
+      "cpu_time": 1.5587977975000081e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20_median",
@@ -3744,9 +3744,9 @@
       "aggregate_name": "median",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 1.7064577162500427e+04,
-      "cpu_time": 1.6986280599999875e+04,
-      "time_unit": "ms"
+      "real_time": 1.5828552394499638e+01,
+      "cpu_time": 1.5594446250000146e+01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20_stddev",
@@ -3759,9 +3759,9 @@
       "aggregate_name": "stddev",
       "aggregate_unit": "time",
       "iterations": 20,
-      "real_time": 7.4867978079177178e+01,
-      "cpu_time": 8.2153777170509926e+01,
-      "time_unit": "ms"
+      "real_time": 5.8604823698370501e-02,
+      "cpu_time": 1.6227375272175129e-01,
+      "time_unit": "s"
     },
     {
       "name": "RangeFixtureCpu/cpu_multi_threaded/20_cv",
@@ -3774,9 +3774,9 @@
       "aggregate_name": "cv",
       "aggregate_unit": "percentage",
       "iterations": 20,
-      "real_time": 4.3831566017996813e-03,
-      "cpu_time": 4.8351210891284281e-03,
-      "time_unit": "ms"
+      "real_time": 3.7059166004220351e-03,
+      "cpu_time": 1.0410186169239211e-02,
+      "time_unit": "s"
     }
   ]
 }
