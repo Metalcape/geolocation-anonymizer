@@ -13,6 +13,7 @@
 
 namespace gpu {
     class BFVContext {
+        troy::MemoryPoolHandle pool;
     public:
         troy::EncryptionParameters parms;
         troy::HeContextPointer context;
@@ -26,6 +27,7 @@ namespace gpu {
         troy::BatchEncoder batch_encoder;
 
         BFVContext(const troy::EncryptionParameters &parms);
+        ~BFVContext();
     };
 }
 

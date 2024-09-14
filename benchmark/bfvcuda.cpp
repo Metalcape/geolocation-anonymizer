@@ -5,28 +5,33 @@ namespace gpu {
 
     // Constructors
     gpu::BFVContext::BFVContext(const troy::EncryptionParameters &parms) : 
+        pool(MemoryPool::create()),
         parms(parms),
         context(HeContext::create(parms, 0, SecurityLevel::Classical128)), 
-        keygen(context), 
+        keygen(context, pool), 
         secret_key(keygen.secret_key()), 
         encryptor(context), 
         evaluator(context), 
-        decryptor(context, secret_key), 
+        decryptor(context, secret_key, pool), 
         batch_encoder(context) 
     {
         if(utils::device_count() > 0) {
-            context->to_device_inplace();
-            batch_encoder.to_device_inplace();
-            encryptor.to_device_inplace();
-            decryptor.to_device_inplace();
-            keygen.to_device_inplace();
-            secret_key.to_device_inplace();
+            context->to_device_inplace(pool);
+            batch_encoder.to_device_inplace(pool);
+            encryptor.to_device_inplace(pool);
+            decryptor.to_device_inplace(pool);
+            keygen.to_device_inplace(pool);
+            secret_key.to_device_inplace(pool);
         }
 
         evaluator = Evaluator(context);
         public_key = keygen.create_public_key(false);
         relin_keys = keygen.create_relin_keys(false);
-        encryptor.set_public_key(public_key);
+        encryptor.set_public_key(public_key, pool);
+    }
+
+    gpu::BFVContext::~BFVContext() {
+        pool.get()->destroy();
     }
 
     // Functions
@@ -44,14 +49,14 @@ namespace gpu {
         std::vector<Ciphertext> enc_data(data.size());
         for(int i = 0; i < enc_data.size(); ++i) {
             Plaintext pt = bfv.batch_encoder.encode_new(data[i]);
-            Ciphertext ct = bfv.encryptor.encrypt_asymmetric_new(pt.to_device());
-            enc_data[i] = ct.to_host();
+            Ciphertext ct = bfv.encryptor.encrypt_asymmetric_new(pt);
+            enc_data[i] = ct;
         }
         return enc_data;
     }
 
     void mod_exp(gpu::BFVContext &bfv, const Ciphertext &x, uint64_t exponent, Ciphertext &result) {
-        Plaintext plain_one = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1)).to_device();
+        Plaintext plain_one = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), 1));
         Ciphertext base(x);
         result = bfv.encryptor.encrypt_asymmetric_new(plain_one);
 
@@ -116,11 +121,12 @@ namespace gpu {
         // Sum over i: if x[j] was within [0, y - 1] then result[j] == 1, 0 otherwise
         // std::vector<Ciphertext> equals(y);
         bfv.encryptor.encrypt_zero_asymmetric(result);
+        Plaintext y_ptx;
+        Ciphertext equals;
 
         for(uint64_t i = 0; i < y; ++i) {
-            Plaintext ptx = bfv.batch_encoder.encode_new(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i));
-            Ciphertext equals;
-            equate_plain(bfv, x, ptx, equals);
+            bfv.batch_encoder.encode(std::vector<uint64_t>(bfv.batch_encoder.slot_count(), i), y_ptx);
+            equate_plain(bfv, x, y_ptx, equals);
             // Sum every intermediate result immediately to avoid memory growth
             bfv.evaluator.add_inplace(result, equals);
         }
