@@ -77,6 +77,8 @@ BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_single_threaded)(benchmark::State& state
     bfv->evaluator.multiply(enc_data[USER_IDX], aggregate, filtered);
     bfv->evaluator.relinearize_inplace(filtered, bfv->relin_keys);
 
+    std::cout << "Running CPU single-threaded benchmark with K = " << state.range(0) << std::endl;
+
     for (auto _ : state)
         cpu::lt_range(*bfv, filtered, state.range(0), lt);
     
@@ -90,6 +92,7 @@ BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_multi_threaded)(benchmark::State& state)
     bfv->evaluator.add_many(enc_data, aggregate);
     bfv->evaluator.multiply(enc_data[USER_IDX], aggregate, filtered);
     bfv->evaluator.relinearize_inplace(filtered, bfv->relin_keys);
+    std::cout << "Running CPU multi-threaded benchmark with K = " << state.range(0) << std::endl;
 
     for (auto _ : state)
         cpu::lt_range_mt(*bfv, filtered, state.range(0), lt);
@@ -109,6 +112,8 @@ BENCHMARK_DEFINE_F(PolyFixtureCpu, cpu_poly_univariate)(benchmark::State& state)
     seal::Plaintext k("42");
     y = new seal::Ciphertext();
     bfv->encryptor.encrypt(k, *y);
+    
+    std::cout << "Running CPU multi-threaded polynomial benchmark" << std::endl;
 
     for (auto _ : state)
         cpu::lt_univariate(*bfv, *coefficients, filtered, *y, lt);
@@ -128,17 +133,19 @@ BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_single_threaded)(benchmark::State& state
     // Sum everything
     bfv->encryptor.encrypt_zero_asymmetric(aggregate);
     std::for_each(this->enc_data.begin(), this->enc_data.end(), [&](troy::Ciphertext &ctx) {
-        bfv->evaluator.add_inplace(this->aggregate, ctx.to_device());
+        bfv->evaluator.add_inplace(this->aggregate, ctx);
     });
 
     // Filter by user
-    troy::Ciphertext user_data = this->enc_data[USER_IDX].to_device();
+    troy::Ciphertext user_data = this->enc_data[USER_IDX];
     troy::Ciphertext result = bfv->evaluator.multiply_new(user_data, aggregate);
     filtered = bfv->evaluator.relinearize_new(result, bfv->relin_keys);
+    
+    std::cout << "Running GPU benchmark with K = " << state.range(0) << std::endl;
 
     for (auto _ : state)
         gpu::lt_range(*bfv, filtered, state.range(0), lt);
-    
+
     delete bfv;
 }
 
@@ -160,6 +167,8 @@ BENCHMARK_DEFINE_F(PolyFixtureGpu, gpu_poly_univariate)(benchmark::State& state)
     troy::Plaintext k = bfv->batch_encoder.encode_new(std::vector<uint64_t>(bfv->batch_encoder.slot_count(), 42));
     y = new troy::Ciphertext(bfv->encryptor.encrypt_asymmetric_new(k));
 
+    std::cout << "Running GPU polynomial benchmark" << std::endl;
+
     for (auto _ : state)
         gpu::lt_univariate(*bfv, *coefficients, filtered, *y, lt);
     
@@ -172,6 +181,7 @@ BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_encryption)(benchmark::State& state) {
     bfv = new cpu::BFVContext(cpu::get_default_parameters());
     seal::Plaintext ptx;
     seal::Ciphertext ctx;
+    std::cout << "Running CPU encoding and encryption benchmark" << std::endl;
 
     for (auto _ : state) {
         bfv->batch_encoder.encode(data[0], ptx);
@@ -186,6 +196,7 @@ BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_decryption)(benchmark::State& state) {
     seal::Plaintext ptx;
     seal::Ciphertext ctx;
     std::vector<uint64_t> out;
+    std::cout << "Running CPU decryption and decoding benchmark" << std::endl;
 
     for (auto _ : state) {
         bfv->decryptor.decrypt(enc_data[0], ptx);
@@ -198,6 +209,7 @@ BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_encryption)(benchmark::State& state) {
     bfv = new gpu::BFVContext(gpu::get_default_parameters());
     troy::Plaintext ptx;
     troy::Ciphertext ctx;
+    std::cout << "Running GPU encoding and encryption benchmark" << std::endl;
 
     for (auto _ : state) {
         ptx = bfv->batch_encoder.encode_new(data[0]);
@@ -212,6 +224,7 @@ BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_decryption)(benchmark::State& state) {
     troy::Plaintext ptx;
     troy::Ciphertext ctx;
     std::vector<uint64_t> out;
+    std::cout << "Running GPU decryption and decoding benchmark" << std::endl;
 
     for (auto _ : state) {
         ptx = bfv->decryptor.decrypt_new(enc_data[0].to_device());
