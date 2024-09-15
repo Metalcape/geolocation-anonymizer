@@ -109,11 +109,11 @@ BENCHMARK_DEFINE_F(PolyFixtureCpu, cpu_poly_univariate)(benchmark::State& state)
     bfv->evaluator.relinearize_inplace(filtered, bfv->relin_keys);
 
     // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
-    seal::Plaintext k("42");
+    seal::Plaintext k(std::to_string(state.range(0)));
     y = new seal::Ciphertext();
     bfv->encryptor.encrypt(k, *y);
     
-    std::cout << "Running CPU multi-threaded polynomial benchmark" << std::endl;
+    std::cout << "Running CPU multi-threaded polynomial benchmark with K = " << state.range(0) << std::endl;
 
     for (auto _ : state)
         cpu::lt_univariate(*bfv, *coefficients, filtered, *y, lt);
@@ -164,10 +164,10 @@ BENCHMARK_DEFINE_F(PolyFixtureGpu, gpu_poly_univariate)(benchmark::State& state)
     filtered = bfv->evaluator.relinearize_new(result, bfv->relin_keys);
 
     // Prepare encrypted K (this algorithm does NOT require K to be in the clear)
-    troy::Plaintext k = bfv->batch_encoder.encode_new(std::vector<uint64_t>(bfv->batch_encoder.slot_count(), 42));
+    troy::Plaintext k = bfv->batch_encoder.encode_new(std::vector<uint64_t>(bfv->batch_encoder.slot_count(), state.range(0)));
     y = new troy::Ciphertext(bfv->encryptor.encrypt_asymmetric_new(k));
 
-    std::cout << "Running GPU polynomial benchmark" << std::endl;
+    std::cout << "Running GPU polynomial benchmark with K = " << state.range(0) << std::endl;
 
     for (auto _ : state)
         gpu::lt_univariate(*bfv, *coefficients, filtered, *y, lt);
@@ -176,15 +176,62 @@ BENCHMARK_DEFINE_F(PolyFixtureGpu, gpu_poly_univariate)(benchmark::State& state)
     delete bfv;
 }
 
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_encoding)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new cpu::BFVContext(cpu::get_default_parameters());
+    seal::Plaintext ptx;
+    std::cout << "Running CPU encoding benchmark" << std::endl;
+
+    for (auto _ : state) {
+        bfv->batch_encoder.encode(data[0], ptx);
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_decoding)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new cpu::BFVContext(cpu::get_default_parameters());
+    seal::Plaintext ptx;
+    bfv->batch_encoder.encode(data[0], ptx);
+    std::vector<uint64_t> out;
+    std::cout << "Running CPU decoding benchmark" << std::endl;
+
+    for (auto _ : state) {
+        bfv->batch_encoder.decode(ptx, out);
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_encoding)(benchmark::State& state) {
+    data = generate_dataset(1);
+    bfv = new gpu::BFVContext(gpu::get_default_parameters());
+    troy::Plaintext ptx;
+    std::cout << "Running GPU encoding benchmark" << std::endl;
+
+    for (auto _ : state) {
+        ptx = bfv->batch_encoder.encode_new(data[0]);
+    }
+}
+
+BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_decoding)(benchmark::State& state) {
+    data = generate_dataset(1);  
+    bfv = new gpu::BFVContext(gpu::get_default_parameters());
+    troy::Plaintext ptx;
+    ptx = bfv->batch_encoder.encode_new(data[0]);
+    std::vector<uint64_t> out;
+    std::cout << "Running GPU decoding benchmark" << std::endl;
+
+    for (auto _ : state) {
+        out = bfv->batch_encoder.decode_new(ptx);
+    }
+}
 BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_encryption)(benchmark::State& state) {
     data = generate_dataset(1);
     bfv = new cpu::BFVContext(cpu::get_default_parameters());
     seal::Plaintext ptx;
     seal::Ciphertext ctx;
-    std::cout << "Running CPU encoding and encryption benchmark" << std::endl;
+    bfv->batch_encoder.encode(data[0], ptx);
+    std::cout << "Running CPU encryption benchmark" << std::endl;
 
     for (auto _ : state) {
-        bfv->batch_encoder.encode(data[0], ptx);
         bfv->encryptor.encrypt(ptx, ctx);
     }
 }
@@ -194,13 +241,10 @@ BENCHMARK_DEFINE_F(RangeFixtureCpu, cpu_decryption)(benchmark::State& state) {
     bfv = new cpu::BFVContext(cpu::get_default_parameters());
     enc_data = cpu::encrypt_data(*bfv, data);
     seal::Plaintext ptx;
-    seal::Ciphertext ctx;
-    std::vector<uint64_t> out;
-    std::cout << "Running CPU decryption and decoding benchmark" << std::endl;
+    std::cout << "Running CPU decryption benchmark" << std::endl;
 
     for (auto _ : state) {
         bfv->decryptor.decrypt(enc_data[0], ptx);
-        bfv->batch_encoder.decode(ptx, out);
     }
 }
 
@@ -209,10 +253,10 @@ BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_encryption)(benchmark::State& state) {
     bfv = new gpu::BFVContext(gpu::get_default_parameters());
     troy::Plaintext ptx;
     troy::Ciphertext ctx;
-    std::cout << "Running GPU encoding and encryption benchmark" << std::endl;
+    ptx = bfv->batch_encoder.encode_new(data[0]);
+    std::cout << "Running GPU encryption benchmark" << std::endl;
 
     for (auto _ : state) {
-        ptx = bfv->batch_encoder.encode_new(data[0]);
         ctx = bfv->encryptor.encrypt_asymmetric_new(ptx.to_device());
     }
 }
@@ -222,13 +266,10 @@ BENCHMARK_DEFINE_F(RangeFixtureGpu, gpu_decryption)(benchmark::State& state) {
     bfv = new gpu::BFVContext(gpu::get_default_parameters());
     enc_data = gpu::encrypt_data(*bfv, data);
     troy::Plaintext ptx;
-    troy::Ciphertext ctx;
-    std::vector<uint64_t> out;
-    std::cout << "Running GPU decryption and decoding benchmark" << std::endl;
+    std::cout << "Running GPU decryption benchmark" << std::endl;
 
     for (auto _ : state) {
         ptx = bfv->decryptor.decrypt_new(enc_data[0].to_device());
-        out = bfv->batch_encoder.decode_new(ptx);
     }
 }
 
@@ -327,20 +368,28 @@ int main(int argc, char** argv) {
             } else if (arg == "--type=st") {
                 BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_single_threaded)->DenseRange(10, 20, 1);           
             } else if (arg == "--type=poly") {
-                BENCHMARK_REGISTER_F(PolyFixtureCpu, cpu_poly_univariate);
+                BENCHMARK_REGISTER_F(PolyFixtureCpu, cpu_poly_univariate)->DenseRange(10, 100, 10);
             } else if (arg == "--type=gpu") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 20, 1);
             } else if (arg == "--type=gpu_range") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_single_threaded)->DenseRange(10, 100, 5);
             } else if (arg == "--type=gpu_poly") {
-                BENCHMARK_REGISTER_F(PolyFixtureGpu, gpu_poly_univariate);
-            } else if (arg == "--type=cpu_enc") {
+                BENCHMARK_REGISTER_F(PolyFixtureGpu, gpu_poly_univariate)->DenseRange(10, 100, 10);
+            } else if (arg == "--type=cpu_encode") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_encoding);
+            } else if (arg == "--type=cpu_decode") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_decoding);
+            } else if (arg == "--type=gpu_encode") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_encoding);
+            } else if (arg == "--type=gpu_decode") {
+                BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_decoding);
+            } else if (arg == "--type=cpu_encrypt") {
                 BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_encryption);
-            } else if (arg == "--type=cpu_dec") {
+            } else if (arg == "--type=cpu_decrypt") {
                 BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_decryption);
-            } else if (arg == "--type=gpu_enc") {
+            } else if (arg == "--type=gpu_encrypt") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_encryption);
-            } else if (arg == "--type=gpu_dec") {
+            } else if (arg == "--type=gpu_decrypt") {
                 BENCHMARK_REGISTER_F(RangeFixtureGpu, gpu_decryption);
             } else if (arg == "--type=test_eq") {
                 test_equivalence();
