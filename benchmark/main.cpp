@@ -365,8 +365,12 @@ int main(int argc, char** argv) {
         if(has_type) {
             if (arg == "--type=mt") {
                 BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_multi_threaded)->DenseRange(10, 20, 1);             
+            } else if (arg == "--type=mt_range") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_multi_threaded)->DenseRange(10, 100, 10);           
             } else if (arg == "--type=st") {
                 BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_single_threaded)->DenseRange(10, 20, 1);           
+            } else if (arg == "--type=st_range") {
+                BENCHMARK_REGISTER_F(RangeFixtureCpu, cpu_single_threaded)->DenseRange(10, 50, 10);           
             } else if (arg == "--type=poly") {
                 BENCHMARK_REGISTER_F(PolyFixtureCpu, cpu_poly_univariate)->DenseRange(10, 100, 10);
             } else if (arg == "--type=gpu") {
